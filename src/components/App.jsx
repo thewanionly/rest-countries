@@ -24,11 +24,25 @@ const App = () => {
   const [loading, setLoading] = useState(false)
 
   useEffect(() => {
-    // fetch countries
-    const fetchCountries = async () => {
+    // load countries
+    const loadCountries = async () => {
       try {
         setLoading(true)
-        const data = await fetchFromUrl(`${API_ENDPOINT}/all`)
+        // Get countries from localStorage
+        let data = localStorage.getItem('countries')
+
+        if (data) {
+          // Parse data from localStorage to JS object
+          data = JSON.parse(data)
+          console.log('data localStorage', data)
+        } else {
+          // Get countries from API
+          data = await fetchFromUrl(`${API_ENDPOINT}/all`)
+
+          // Store data in localStorage
+          localStorage.setItem('countries', JSON.stringify(data))
+          console.log('data API', data)
+        }
 
         setCountries(data)
         setLoading(false)
@@ -38,7 +52,7 @@ const App = () => {
       }
     }
 
-    fetchCountries()
+    loadCountries()
   }, [])
 
   console.log('App countries', countries)
