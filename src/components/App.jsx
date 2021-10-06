@@ -63,30 +63,60 @@ const App = () => {
   console.log('App loading', loading)
 
   return (
-    <div>
-      {countries ? (
-        <>
-          <h2>List of Countries</h2>
-          <ul>
-            {countries.map(country => (
-              <CountriesCard key={country.alpha2Code} data={country} />
-            ))}
-          </ul>
-        </>
-      ) : error ? (
-        <h1>{`There's an error: ${error}`}</h1>
-      ) : (
-        loading && <h1>Loading...</h1>
-      )}
+    <div className='app'>
+      <header className='navbar'>
+        <h1>Where in the world?</h1>
+        <button>Dark Mode</button>
+      </header>
+      <main className='main'>
+        <div className='main__header'>
+          <input type='text' placeholder='Search for a country...' />
+          <select>
+            <option value='africa'>Africa</option>
+            <option value='america'>America</option>
+            <option value='asia'>Asia</option>
+            <option value='europe'>Europe</option>
+            <option value='oceania'>Oceania</option>
+          </select>
+        </div>
+        <div className='main__content'>
+          {countries ? (
+            countries.map(country => <CountriesCard key={country.alpha2Code} data={country} />)
+          ) : error ? (
+            <h1>{`There's an error: ${error}`}</h1>
+          ) : (
+            loading && <h1>Loading...</h1>
+          )}
+        </div>
+      </main>
     </div>
   )
 }
 
-const CountriesCard = ({ data }) => {
+const CountriesCard = ({ data = {} }) => {
+  const { flag, name, population, region, capital } = data
+
   return (
-    <li>
-      <span>{data.name}</span>
-    </li>
+    <div className='countries-card'>
+      <div className='countries-card__flag'>
+        <img className='countries-card__flag__img' src={flag} alt={name} />
+      </div>
+      <div className='countries-card__details'>
+        <h3 className='countries-card__details__name'>{name}</h3>
+        <div className='countries-card__details__population'>
+          <strong>Population: </strong>
+          {population}
+        </div>
+        <div className='countries-card__details__region'>
+          <strong>Region: </strong>
+          {region}
+        </div>
+        <div className='countries-card__details__capital'>
+          <strong>Capital: </strong>
+          {capital}
+        </div>
+      </div>
+    </div>
   )
 }
 
