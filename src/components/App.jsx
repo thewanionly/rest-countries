@@ -20,8 +20,17 @@ const fetchFromUrl = async url => {
 
 const App = () => {
   const [countries, setCountries] = useState()
+  const [searchTerm, setSearchTerm] = useState('')
   const [error, setError] = useState(false)
   const [loading, setLoading] = useState(false)
+
+  const filteredCountries = countries.filter(({ name }) =>
+    name.toLowerCase().includes(searchTerm.toLocaleLowerCase())
+  )
+
+  const handleSearch = e => {
+    setSearchTerm(e.target.value)
+  }
 
   useEffect(() => {
     // load countries
@@ -56,11 +65,6 @@ const App = () => {
   }, [])
 
   console.log('App countries', countries)
-  console.log('App countries is array', Array.isArray(countries))
-
-  console.log('App error', error)
-
-  console.log('App loading', loading)
 
   return (
     <div className='app'>
@@ -70,7 +74,12 @@ const App = () => {
       </header>
       <main className='main'>
         <div className='main__header'>
-          <input type='text' placeholder='Search for a country...' />
+          <input
+            type='text'
+            placeholder='Search for a country...'
+            value={searchTerm}
+            onChange={handleSearch}
+          />
           <select>
             <option value='africa'>Africa</option>
             <option value='america'>America</option>
@@ -80,8 +89,10 @@ const App = () => {
           </select>
         </div>
         <div className='main__content'>
-          {countries ? (
-            countries.map(country => <CountriesCard key={country.alpha2Code} data={country} />)
+          {filteredCountries ? (
+            filteredCountries.map(country => (
+              <CountriesCard key={country.alpha2Code} data={country} />
+            ))
           ) : error ? (
             <h1>{`There's an error: ${error}`}</h1>
           ) : (
