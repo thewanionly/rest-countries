@@ -24,7 +24,7 @@ const App = () => {
   const [error, setError] = useState(false)
   const [loading, setLoading] = useState(false)
 
-  const filteredCountries = countries.filter(({ name }) =>
+  const filteredCountries = countries?.filter(({ name }) =>
     name.toLowerCase().includes(searchTerm.toLocaleLowerCase())
   )
 
