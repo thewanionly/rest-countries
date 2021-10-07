@@ -20,13 +20,17 @@ const fetchFromUrl = async url => {
 
 const App = () => {
   const [countries, setCountries] = useState()
+  const [regions, setRegions] = useState()
   const [isDarkMode, setIsDarkMode] = useState(false)
   const [searchTerm, setSearchTerm] = useState('')
+  const [filterTerm, setFilterTerm] = useState('')
   const [error, setError] = useState(false)
   const [loading, setLoading] = useState(false)
 
-  const filteredCountries = countries?.filter(({ name }) =>
-    name.toLowerCase().includes(searchTerm.toLocaleLowerCase())
+  const filteredCountries = countries?.filter(
+    ({ name, region }) =>
+      name.toLowerCase().includes(searchTerm.toLocaleLowerCase()) &&
+      (!filterTerm || filterTerm === 'Show all' || region === filterTerm)
   )
 
   const handleSetColorMode = () => {
@@ -35,6 +39,10 @@ const App = () => {
 
   const handleSearch = e => {
     setSearchTerm(e.target.value)
+  }
+
+  const handleFilterByRegion = e => {
+    setFilterTerm(e.target.value)
   }
 
   useEffect(() => {
@@ -56,8 +64,23 @@ const App = () => {
           localStorage.setItem('countries', JSON.stringify(data))
         }
 
+        // Set countries
         setCountries(data)
         setLoading(false)
+
+        // Set regions
+        const allRegions = data?.reduce(
+          (regions, country) => {
+            if (!regions?.includes(country.region)) {
+              return [...regions, country.region]
+            } else {
+              return regions
+            }
+          },
+          ['Show all']
+        )
+
+        setRegions(allRegions)
       } catch (error) {
         setError(error)
         setLoading(false)
@@ -70,7 +93,14 @@ const App = () => {
   // log only if countries changed
   useEffect(() => {
     console.log('App countries', countries)
-  }, [countries])
+
+    console.log('App regions', regions)
+  }, [countries, regions])
+
+  // log only if filteredCountries changed
+  useEffect(() => {
+    console.log('App filteredCountries', filteredCountries)
+  }, [filteredCountries])
 
   return (
     <div className={`app${isDarkMode ? ' dark-mode' : ''}`}>
@@ -86,12 +116,12 @@ const App = () => {
             value={searchTerm}
             onChange={handleSearch}
           />
-          <select>
-            <option value='africa'>Africa</option>
-            <option value='america'>America</option>
-            <option value='asia'>Asia</option>
-            <option value='europe'>Europe</option>
-            <option value='oceania'>Oceania</option>
+          <select value={filterTerm} onChange={handleFilterByRegion}>
+            {regions?.map(region => (
+              <option key={region} value={region}>
+                {region}
+              </option>
+            ))}
           </select>
         </div>
         <div className='main__content'>
