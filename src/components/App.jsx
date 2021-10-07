@@ -48,14 +48,12 @@ const App = () => {
         if (data) {
           // Parse data from localStorage to JS object
           data = JSON.parse(data)
-          console.log('data localStorage', data)
         } else {
           // Get countries from API
           data = await fetchFromUrl(`${API_ENDPOINT}/all`)
 
           // Store data in localStorage
           localStorage.setItem('countries', JSON.stringify(data))
-          console.log('data API', data)
         }
 
         setCountries(data)
@@ -69,7 +67,10 @@ const App = () => {
     loadCountries()
   }, [])
 
-  console.log('App countries', countries)
+  // log only if countries changed
+  useEffect(() => {
+    console.log('App countries', countries)
+  }, [countries])
 
   return (
     <div className={`app${isDarkMode ? ' dark-mode' : ''}`}>
