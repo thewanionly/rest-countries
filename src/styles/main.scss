@@ -45,6 +45,7 @@ body {
 
 .main {
   padding: 3rem 5rem;
+  min-height: calc(100vh - 7.25rem);
 
   &__header {
     margin-bottom: 3rem;
