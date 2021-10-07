@@ -31,6 +31,7 @@ html {
 body {
   font-family: $font-primary;
   font-size: $font-size-1;
+  background-color: $color-gray-light;
 }
 
 .navbar {
@@ -44,7 +45,6 @@ body {
 
 .main {
   padding: 3rem 5rem;
-  background-color: $color-gray-light;
 
   &__header {
     margin-bottom: 3rem;
