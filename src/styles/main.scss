@@ -58,7 +58,9 @@ body {
 .main {
   padding: 3rem 5rem;
   min-height: calc(100vh - 7.25rem);
+}
 
+.home {
   &__header {
     margin-bottom: 3rem;
 
@@ -112,5 +114,17 @@ body {
     &__capital {
       margin-bottom: 0.75em;
     }
+  }
+}
+
+.detail {
+  &__header {
+    margin-top: 3rem;
+    margin-bottom: 5rem;
+  }
+
+  &__content {
+    display: flex;
+    justify-content: space-between;
   }
 }

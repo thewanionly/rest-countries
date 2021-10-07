@@ -26,6 +26,7 @@ const App = () => {
   const [filterTerm, setFilterTerm] = useState('')
   const [error, setError] = useState(false)
   const [loading, setLoading] = useState(false)
+  const [selectedCountry, setSelectedCountry] = useState()
 
   const filteredCountries = countries?.filter(
     ({ name, region }) =>
@@ -43,6 +44,10 @@ const App = () => {
 
   const handleFilterByRegion = e => {
     setFilterTerm(e.target.value)
+  }
+
+  const handleShowDetailPage = code => {
+    setSelectedCountry(code)
   }
 
   useEffect(() => {
@@ -109,16 +114,24 @@ const App = () => {
         <button onClick={handleSetColorMode}>Dark Mode</button>
       </header>
       <main className='main'>
-        <HomePage
-          filteredCountries={filteredCountries}
-          error={error}
-          loading={loading}
-          searchTerm={searchTerm}
-          handleSearch={handleSearch}
-          regions={regions}
-          filterTerm={filterTerm}
-          handleFilterByRegion={handleFilterByRegion}
-        />
+        {!selectedCountry ? (
+          <HomePage
+            filteredCountries={filteredCountries}
+            error={error}
+            loading={loading}
+            searchTerm={searchTerm}
+            handleSearch={handleSearch}
+            regions={regions}
+            filterTerm={filterTerm}
+            handleFilterByRegion={handleFilterByRegion}
+            handleShowDetailPage={handleShowDetailPage}
+          />
+        ) : (
+          <DetailPage
+            selectedCountry={selectedCountry}
+            handleShowDetailPage={handleShowDetailPage}
+          />
+        )}
       </main>
     </div>
   )
@@ -132,11 +145,12 @@ const HomePage = ({
   handleSearch,
   regions,
   filterTerm,
-  handleFilterByRegion
+  handleFilterByRegion,
+  handleShowDetailPage
 }) => {
   return (
     <div className='home'>
-      <div className='main__header'>
+      <div className='home__header'>
         <input
           type='text'
           placeholder='Search for a country...'
@@ -151,10 +165,10 @@ const HomePage = ({
           ))}
         </select>
       </div>
-      <div className='main__content'>
+      <div className='home__content'>
         {filteredCountries ? (
           filteredCountries.map(country => (
-            <CountriesCard key={country.alpha2Code} data={country} />
+            <CountriesCard key={country.alpha2Code} data={country} onClick={handleShowDetailPage} />
           ))
         ) : error ? (
           <h1>{`There's an error: ${error}`}</h1>
@@ -166,11 +180,15 @@ const HomePage = ({
   )
 }
 
-const CountriesCard = ({ data = {} }) => {
-  const { flag, name, population, region, capital } = data
+const CountriesCard = ({ data = {}, onClick: handleShowDetailPage }) => {
+  const { alpha2Code, flag, name, population, region, capital } = data
+
+  const handleCardClick = () => {
+    handleShowDetailPage(alpha2Code)
+  }
 
   return (
-    <div className='countries-card'>
+    <div className='countries-card' onClick={handleCardClick}>
       <div className='countries-card__flag'>
         <img className='countries-card__flag__img' src={flag} alt={name} />
       </div>
@@ -189,6 +207,21 @@ const CountriesCard = ({ data = {} }) => {
           {capital}
         </div>
       </div>
+    </div>
+  )
+}
+
+const DetailPage = ({ selectedCountry, handleShowDetailPage }) => {
+  const handleBackClick = () => {
+    handleShowDetailPage(undefined)
+  }
+
+  return (
+    <div className='detail'>
+      <div className='detail__header'>
+        <button onClick={handleBackClick}>Back</button>
+      </div>
+      <div className='detail__content'>{selectedCountry}</div>
     </div>
   )
 }
