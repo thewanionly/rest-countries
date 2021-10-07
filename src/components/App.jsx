@@ -109,33 +109,59 @@ const App = () => {
         <button onClick={handleSetColorMode}>Dark Mode</button>
       </header>
       <main className='main'>
-        <div className='main__header'>
-          <input
-            type='text'
-            placeholder='Search for a country...'
-            value={searchTerm}
-            onChange={handleSearch}
-          />
-          <select value={filterTerm} onChange={handleFilterByRegion}>
-            {regions?.map(region => (
-              <option key={region} value={region}>
-                {region}
-              </option>
-            ))}
-          </select>
-        </div>
-        <div className='main__content'>
-          {filteredCountries ? (
-            filteredCountries.map(country => (
-              <CountriesCard key={country.alpha2Code} data={country} />
-            ))
-          ) : error ? (
-            <h1>{`There's an error: ${error}`}</h1>
-          ) : (
-            loading && <h1>Loading...</h1>
-          )}
-        </div>
+        <HomePage
+          filteredCountries={filteredCountries}
+          error={error}
+          loading={loading}
+          searchTerm={searchTerm}
+          handleSearch={handleSearch}
+          regions={regions}
+          filterTerm={filterTerm}
+          handleFilterByRegion={handleFilterByRegion}
+        />
       </main>
+    </div>
+  )
+}
+
+const HomePage = ({
+  filteredCountries,
+  error,
+  loading,
+  searchTerm,
+  handleSearch,
+  regions,
+  filterTerm,
+  handleFilterByRegion
+}) => {
+  return (
+    <div className='home'>
+      <div className='main__header'>
+        <input
+          type='text'
+          placeholder='Search for a country...'
+          value={searchTerm}
+          onChange={handleSearch}
+        />
+        <select value={filterTerm} onChange={handleFilterByRegion}>
+          {regions?.map(region => (
+            <option key={region} value={region}>
+              {region}
+            </option>
+          ))}
+        </select>
+      </div>
+      <div className='main__content'>
+        {filteredCountries ? (
+          filteredCountries.map(country => (
+            <CountriesCard key={country.alpha2Code} data={country} />
+          ))
+        ) : error ? (
+          <h1>{`There's an error: ${error}`}</h1>
+        ) : (
+          loading && <h1>Loading...</h1>
+        )}
+      </div>
     </div>
   )
 }
