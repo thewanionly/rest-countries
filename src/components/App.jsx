@@ -20,6 +20,7 @@ const fetchFromUrl = async url => {
 
 const App = () => {
   const [countries, setCountries] = useState()
+  const [isDarkMode, setIsDarkMode] = useState(false)
   const [searchTerm, setSearchTerm] = useState('')
   const [error, setError] = useState(false)
   const [loading, setLoading] = useState(false)
@@ -27,6 +28,10 @@ const App = () => {
   const filteredCountries = countries?.filter(({ name }) =>
     name.toLowerCase().includes(searchTerm.toLocaleLowerCase())
   )
+
+  const handleSetColorMode = () => {
+    setIsDarkMode(prev => !prev)
+  }
 
   const handleSearch = e => {
     setSearchTerm(e.target.value)
@@ -67,10 +72,10 @@ const App = () => {
   console.log('App countries', countries)
 
   return (
-    <div className='app'>
+    <div className={`app${isDarkMode ? ' dark-mode' : ''}`}>
       <header className='navbar'>
         <h1>Where in the world?</h1>
-        <button>Dark Mode</button>
+        <button onClick={handleSetColorMode}>Dark Mode</button>
       </header>
       <main className='main'>
         <div className='main__header'>

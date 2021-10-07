@@ -35,6 +35,15 @@ body {
 
 .app {
   background-color: $color-gray-light;
+
+  &.dark-mode {
+    background-color: $color-blue-darker;
+
+    .navbar {
+      background-color: $color-blue-dark;
+      color: $color-gray-light;
+    }
+  }
 }
 
 .navbar {
