@@ -33,6 +33,11 @@ body {
   font-size: $font-size-1;
 }
 
+button {
+  cursor: pointer;
+  padding: 0 1em;
+}
+
 .app {
   background-color: $color-gray-light;
 
