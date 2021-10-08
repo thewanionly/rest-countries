@@ -19,7 +19,7 @@ const DetailPage = ({ selectedCountry, handleShowDetailPage }) => {
       </div>
       <div className='detail__content'>
         {countryDetail ? (
-          <CountryDetail data={countryDetail} />
+          <CountryDetail data={countryDetail} handleShowDetailPage={handleShowDetailPage} />
         ) : error ? (
           <h1>{`There's an error: ${error}`}</h1>
         ) : (
@@ -30,7 +30,7 @@ const DetailPage = ({ selectedCountry, handleShowDetailPage }) => {
   )
 }
 
-const CountryDetail = ({ data = {} }) => {
+const CountryDetail = ({ data = {}, handleShowDetailPage }) => {
   const {
     flag,
     name,
@@ -103,7 +103,11 @@ const CountryDetail = ({ data = {} }) => {
         <div className='country-detail__details__border-countries'>
           <strong>Border Countries:</strong>
           {borders ? (
-            borders?.map(border => <button key={border}>{border}</button>)
+            borders?.map(border => (
+              <button key={border} onClick={() => handleShowDetailPage(border)}>
+                {border}
+              </button>
+            ))
           ) : (
             <em>No border countries</em>
           )}
