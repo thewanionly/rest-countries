@@ -62,7 +62,9 @@
       grid-area: footer;
       align-items: flex-start;
       display: flex;
+      flex-wrap: wrap;
       gap: 1.5rem;
+      overflow: hidden;
     }
 
     &__row {
