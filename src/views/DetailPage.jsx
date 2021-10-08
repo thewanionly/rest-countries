@@ -45,6 +45,44 @@ const CountryDetail = ({ data = {} }) => {
     borders
   } = data
 
+  const leftDetails = [
+    {
+      label: 'Native Name',
+      value: nativeName
+    },
+    {
+      label: 'Population',
+      value: population
+    },
+    {
+      label: 'Region',
+      value: region
+    },
+    {
+      label: 'Sub Region',
+      value: subregion
+    },
+    {
+      label: 'Capital',
+      value: capital
+    }
+  ]
+
+  const rightDetails = [
+    {
+      label: 'Top Level Domain',
+      value: topLevelDomain?.join(', ') || ''
+    },
+    {
+      label: 'Currencies',
+      value: currencies?.map(({ name }) => name).join(', ') || ''
+    },
+    {
+      label: 'Languages',
+      value: languages?.map(({ name }) => name).join(', ') || ''
+    }
+  ]
+
   return (
     <div className='country-detail'>
       <div className='country-detail__flag'>
@@ -52,19 +90,34 @@ const CountryDetail = ({ data = {} }) => {
       </div>
       <div className='country-detail__details'>
         <h1 className='country-detail__details__name'>{name}</h1>
-        <div className='country-detail__details__population'>
-          <strong>Population: </strong>
-          {population}
+        <div className='country-detail__details__left'>
+          {leftDetails.map(item => (
+            <CountryDetailRow key={item.value} {...item} />
+          ))}
         </div>
-        <div className='country-detail__details__region'>
-          <strong>Region: </strong>
-          {region}
+        <div className='country-detail__details__right'>
+          {rightDetails.map(item => (
+            <CountryDetailRow key={item.value} {...item} />
+          ))}
         </div>
-        <div className='country-detail__details__capital'>
-          <strong>Capital: </strong>
-          {capital}
+        <div className='country-detail__details__border-countries'>
+          <strong>Border Countries:</strong>
+          {borders ? (
+            borders?.map(border => <button key={border}>{border}</button>)
+          ) : (
+            <em>No border countries</em>
+          )}
         </div>
       </div>
+    </div>
+  )
+}
+
+const CountryDetailRow = ({ label, value }) => {
+  return (
+    <div className='country-detail__details__row'>
+      <strong>{`${label}: `}</strong>
+      <span>{value}</span>
     </div>
   )
 }

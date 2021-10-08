@@ -20,8 +20,8 @@
   width: 100%;
 
   &__flag {
-    height: 50rem;
-    width: 70rem;
+    height: 40rem;
+    width: 65rem;
     min-width: 45rem;
 
     &__img {
@@ -32,22 +32,42 @@
   }
 
   &__details {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, min-content);
+    grid-template-areas:
+      'name name'
+      'left right'
+      'footer footer';
+    justify-content: space-between;
+    column-gap: 5rem;
+    row-gap: 2rem;
 
-    height: 100%;
     width: 40%;
 
     &__name {
-      margin-bottom: 4rem;
+      grid-area: name;
+      margin-bottom: 2rem;
     }
 
-    &__population,
-    &__region,
-    &__capital {
+    &__left {
+      grid-area: left;
+    }
+
+    &__right {
+      grid-area: right;
+    }
+
+    &__border-countries {
+      grid-area: footer;
+      align-items: flex-start;
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    &__row {
       margin-bottom: 1em;
+      line-height: 1.5;
     }
   }
 }
