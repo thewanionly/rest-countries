@@ -1,5 +1,3 @@
-import { useState, useEffect } from 'react'
-
 import { API_ENDPOINT } from 'utilities/config'
 import { useLoadData } from 'utilities/hooks'
 
