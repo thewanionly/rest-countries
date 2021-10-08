@@ -1,0 +1,52 @@
+// Colors
+$color-blue-dark: hsl(209, 23%, 22%); //Dark Blue (Dark Mode Elements)
+$color-blue-darker: hsl(207, 26%, 17%); //Very Dark Blue (Dark Mode Background)
+$color-blue-darkest: hsl(200, 15%, 8%); //Very Dark Blue (Light Mode Text)
+$color-gray-dark: hsl(0, 0%, 52%); //Dark Gray (Light Mode Input)
+$color-gray-light: hsl(0, 0%, 98%); //Very Light Gray (Light Mode Background)
+$color-white: hsl(0, 0%, 100%); //White (Dark Mode Text & Light Mode Elements)
+
+// Typography
+$font-primary: 'Nunito', sans-serif;
+$font-size-1: 1.4rem;
+$font-size-2: 1.6rem;
+
+// Breakpoints
+$bp-desktop: 90em; // 1440px / 16 = 90em
+$bp-mobile: 23.4375em; // 375px / 16 = 23.4375em
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+html {
+  box-sizing: border-box;
+  font-size: 62.5%; //1rem = 10px 10px/16px = 62.5%
+}
+
+body {
+  font-family: $font-primary;
+  font-size: $font-size-1;
+}
+
+button {
+  cursor: pointer;
+  padding: 0 1em;
+}
+
+.app {
+  background-color: $color-gray-light;
+
+  &.dark-mode {
+    background-color: $color-blue-darker;
+
+    .navbar {
+      background-color: $color-blue-dark;
+      color: $color-gray-light;
+    }
+  }
+}

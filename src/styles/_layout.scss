@@ -1,0 +1,13 @@
+.navbar {
+  height: 7.25rem;
+  padding: 2rem 5rem;
+  background-color: $color-white;
+
+  display: flex;
+  justify-content: space-between;
+}
+
+.main {
+  padding: 3rem 5rem;
+  min-height: calc(100vh - 7.25rem);
+}

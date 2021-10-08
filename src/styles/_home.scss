@@ -1,0 +1,14 @@
+.home {
+  &__header {
+    margin-bottom: 3rem;
+
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__content {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 5rem;
+  }
+}

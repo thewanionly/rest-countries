@@ -1,0 +1,41 @@
+.countries-card {
+  height: 30rem;
+  width: 25rem;
+  background-color: $color-white;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  border-radius: 0.4rem;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &:hover {
+    transform: translateY(-0.5rem);
+    box-shadow: rgba(99, 99, 99, 0.5) 0px 2px 8px 0px;
+  }
+
+  &__flag {
+    height: 45%;
+
+    &__img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  &__details {
+    height: 55%;
+    padding: 2.5rem;
+
+    &__name {
+      margin-bottom: 2rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    &__population,
+    &__region,
+    &__capital {
+      margin-bottom: 0.75em;
+    }
+  }
+}
