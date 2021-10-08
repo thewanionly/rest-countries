@@ -1,49 +1,14 @@
 import { useState, useEffect } from 'react'
 
 import { API_ENDPOINT } from 'utilities/config'
-import { fetchFromUrl } from 'utilities/helpers'
+import { useLoadData } from 'utilities/hooks'
 
 const DetailPage = ({ selectedCountry, handleShowDetailPage }) => {
-  const [countryDetail, setCountryDetail] = useState()
-  const [error, setError] = useState(false)
-  const [loading, setLoading] = useState(false)
+  const [countryDetail, isLoading, error] = useLoadData(`${API_ENDPOINT}/alpha/${selectedCountry}`)
 
   const handleBackClick = () => {
     handleShowDetailPage(undefined)
   }
-
-  useEffect(() => {
-    // load countries
-    const loadCountryDetail = async () => {
-      const localStorageKey = `country-detail-${selectedCountry}`
-
-      try {
-        setLoading(true)
-        // Get country detail from localStorage
-        let data = localStorage.getItem(localStorageKey)
-
-        if (data) {
-          // Parse data from localStorage to JS object
-          data = JSON.parse(data)
-        } else {
-          // Get countries from API
-          data = await fetchFromUrl(`${API_ENDPOINT}/alpha/${selectedCountry}`)
-
-          // Store data in localStorage
-          localStorage.setItem(localStorageKey, JSON.stringify(data))
-        }
-
-        // Set countries
-        setCountryDetail(data)
-        setLoading(false)
-      } catch (error) {
-        setError(error)
-        setLoading(false)
-      }
-    }
-
-    loadCountryDetail()
-  }, [])
 
   console.log('Country detail', countryDetail)
 
@@ -58,7 +23,7 @@ const DetailPage = ({ selectedCountry, handleShowDetailPage }) => {
         ) : error ? (
           <h1>{`There's an error: ${error}`}</h1>
         ) : (
-          loading && <h1>Loading...</h1>
+          isLoading && <h1>Loading...</h1>
         )}
       </div>
     </div>
