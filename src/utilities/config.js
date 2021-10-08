@@ -1,1 +1,3 @@
-export const API_ENDPOINT = 'https://restcountries.com/v2'
+const API_ENDPOINT = 'https://restcountries.com/v2'
+
+export { API_ENDPOINT }

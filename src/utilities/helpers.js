@@ -1,5 +1,5 @@
 // fetch from API
-export const fetchFromUrl = async url => {
+const fetchFromUrl = async url => {
   try {
     const response = await fetch(url)
     const data = await response.json()
@@ -12,3 +12,5 @@ export const fetchFromUrl = async url => {
     throw error
   }
 }
+
+export { fetchFromUrl }
