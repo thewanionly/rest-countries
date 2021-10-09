@@ -24,7 +24,7 @@ const DetailPage = () => {
         <button onClick={handleBackClick}>Back</button>
       </div>
       <div className='detail__content'>
-        {countryDetail ? (
+        {countryDetail && !error && !isLoading ? (
           <CountryDetail data={countryDetail} handleShowDetailPage={handleShowDetailPage} />
         ) : error ? (
           <h1>{`There's an error: ${error}`}</h1>
