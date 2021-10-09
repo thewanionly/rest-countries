@@ -13,10 +13,18 @@ const fetchFromUrl = async url => {
   }
 }
 
+// converts first letter of a string to uppercase
 const titleCase = str => {
   if (!str) return str
 
   return str[0].toUpperCase() + str.slice(1)
 }
 
-export { fetchFromUrl, titleCase }
+// converts "camelCase" to "Standard Format"
+const camelCaseToStandardFormat = (str, separator = ' ') => {
+  if (!str) return str
+
+  return titleCase(str.split(/(?=[A-Z])/).join(separator))
+}
+
+export { fetchFromUrl, titleCase, camelCaseToStandardFormat }
