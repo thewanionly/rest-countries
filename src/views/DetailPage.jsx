@@ -2,6 +2,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 
 import { API_ENDPOINT } from 'utilities/config'
 import { useLoadData } from 'utilities/hooks'
+import { titleCase } from 'utilities/helpers'
 
 const DetailPage = () => {
   const navigate = useNavigate()
@@ -51,43 +52,17 @@ const CountryDetail = ({ data = {}, handleShowDetailPage }) => {
     borders
   } = data
 
-  const leftDetails = [
-    {
-      label: 'Native Name',
-      value: nativeName
-    },
-    {
-      label: 'Population',
-      value: population
-    },
-    {
-      label: 'Region',
-      value: region
-    },
-    {
-      label: 'Sub Region',
-      value: subregion
-    },
-    {
-      label: 'Capital',
-      value: capital
+  const formatLabel = label => {
+    if (label === 'nativeName') {
+      return 'Native Name'
+    } else if (label === 'subregion') {
+      return 'Sub Region'
+    } else if (label === 'topLevelDomain') {
+      return 'Top Level Domain'
     }
-  ]
 
-  const rightDetails = [
-    {
-      label: 'Top Level Domain',
-      value: topLevelDomain?.join(', ') || ''
-    },
-    {
-      label: 'Currencies',
-      value: currencies?.map(({ name }) => name).join(', ') || ''
-    },
-    {
-      label: 'Languages',
-      value: languages?.map(({ name }) => name).join(', ') || ''
-    }
-  ]
+    return titleCase(label)
+  }
 
   return (
     <div className='country-detail'>
@@ -97,13 +72,19 @@ const CountryDetail = ({ data = {}, handleShowDetailPage }) => {
       <div className='country-detail__details'>
         <h1 className='country-detail__details__name'>{name}</h1>
         <div className='country-detail__details__left'>
-          {leftDetails.map(item => (
-            <CountryDetailRow key={item.value} {...item} />
-          ))}
+          {Object.entries({ nativeName, population, region, subregion, capital }).map(
+            ([label, value]) => (
+              <CountryDetailRow key={value} label={formatLabel(label)} value={value} />
+            )
+          )}
         </div>
         <div className='country-detail__details__right'>
-          {rightDetails.map(item => (
-            <CountryDetailRow key={item.value} {...item} />
+          {Object.entries({
+            topLevelDomain: topLevelDomain?.join(', ') || '',
+            currencies: currencies?.map(({ name }) => name).join(', ') || '',
+            languages: languages?.map(({ name }) => name).join(', ') || ''
+          }).map(([label, value]) => (
+            <CountryDetailRow key={value} label={formatLabel(label)} value={value} />
           ))}
         </div>
         <div className='country-detail__details__border-countries'>
