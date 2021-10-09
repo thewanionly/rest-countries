@@ -2,7 +2,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 
 import { API_ENDPOINT } from 'utilities/config'
 import { useLoadData } from 'utilities/hooks'
-import { titleCase } from 'utilities/helpers'
+import { camelCaseToStandardFormat } from 'utilities/helpers'
 
 const DetailPage = () => {
   const navigate = useNavigate()
@@ -53,15 +53,11 @@ const CountryDetail = ({ data = {}, handleShowDetailPage }) => {
   } = data
 
   const formatLabel = label => {
-    if (label === 'nativeName') {
-      return 'Native Name'
-    } else if (label === 'subregion') {
+    if (label === 'subregion') {
       return 'Sub Region'
-    } else if (label === 'topLevelDomain') {
-      return 'Top Level Domain'
     }
 
-    return titleCase(label)
+    return camelCaseToStandardFormat(label)
   }
 
   return (
