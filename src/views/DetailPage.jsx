@@ -1,11 +1,19 @@
+import { useNavigate, useParams } from 'react-router-dom'
+
 import { API_ENDPOINT } from 'utilities/config'
 import { useLoadData } from 'utilities/hooks'
 
-const DetailPage = ({ selectedCountry, handleShowDetailPage }) => {
-  const [countryDetail, isLoading, error] = useLoadData(`${API_ENDPOINT}/alpha/${selectedCountry}`)
+const DetailPage = () => {
+  const navigate = useNavigate()
+  const { id } = useParams()
+  const [countryDetail, isLoading, error] = useLoadData(`${API_ENDPOINT}/alpha/${id}`)
 
   const handleBackClick = () => {
-    handleShowDetailPage(undefined)
+    navigate('/')
+  }
+
+  const handleShowDetailPage = country => {
+    navigate(`/${country.toLowerCase()}`)
   }
 
   console.log('Country detail', countryDetail)

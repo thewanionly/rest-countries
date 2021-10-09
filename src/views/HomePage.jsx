@@ -8,8 +8,7 @@ const HomePage = ({
   handleSearch,
   regions,
   filterTerm,
-  handleFilterByRegion,
-  handleShowDetailPage
+  handleFilterByRegion
 }) => {
   return (
     <div className='home'>
@@ -31,7 +30,7 @@ const HomePage = ({
       <div className='home__content'>
         {filteredCountries ? (
           filteredCountries.map(country => (
-            <CountriesCard key={country.alpha2Code} data={country} onClick={handleShowDetailPage} />
+            <CountriesCard key={country.alpha2Code} data={country} />
           ))
         ) : error ? (
           <h1>{`There's an error: ${error}`}</h1>

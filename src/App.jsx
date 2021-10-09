@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 
 import { API_ENDPOINT } from 'utilities/config'
 import { useLoadData } from 'utilities/hooks'
@@ -12,8 +13,6 @@ const App = () => {
   const [isDarkMode, setIsDarkMode] = useState(false)
   const [searchTerm, setSearchTerm] = useState('')
   const [filterTerm, setFilterTerm] = useState('')
-
-  const [selectedCountry, setSelectedCountry] = useState()
 
   const filteredCountries = countries?.filter(
     ({ name, region }) =>
@@ -31,10 +30,6 @@ const App = () => {
 
   const handleFilterByRegion = e => {
     setFilterTerm(e.target.value)
-  }
-
-  const handleShowDetailPage = code => {
-    setSelectedCountry(code)
   }
 
   // log only if countries changed
@@ -75,24 +70,26 @@ const App = () => {
         <button onClick={handleSetColorMode}>Dark Mode</button>
       </header>
       <main className='main'>
-        {!selectedCountry ? (
-          <HomePage
-            filteredCountries={filteredCountries}
-            error={error}
-            loading={isLoading}
-            searchTerm={searchTerm}
-            handleSearch={handleSearch}
-            regions={regions}
-            filterTerm={filterTerm}
-            handleFilterByRegion={handleFilterByRegion}
-            handleShowDetailPage={handleShowDetailPage}
-          />
-        ) : (
-          <DetailPage
-            selectedCountry={selectedCountry}
-            handleShowDetailPage={handleShowDetailPage}
-          />
-        )}
+        <Router>
+          <Routes>
+            <Route
+              path='/'
+              element={
+                <HomePage
+                  filteredCountries={filteredCountries}
+                  error={error}
+                  loading={isLoading}
+                  searchTerm={searchTerm}
+                  handleSearch={handleSearch}
+                  regions={regions}
+                  filterTerm={filterTerm}
+                  handleFilterByRegion={handleFilterByRegion}
+                />
+              }
+            />
+            <Route path=':id' element={<DetailPage />} />
+          </Routes>
+        </Router>
       </main>
     </div>
   )

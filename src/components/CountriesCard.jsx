@@ -1,8 +1,12 @@
-const CountriesCard = ({ data = {}, onClick: handleShowDetailPage }) => {
+import { useNavigate } from 'react-router-dom'
+
+const CountriesCard = ({ data = {} }) => {
+  const navigate = useNavigate()
+
   const { alpha2Code, flag, name, population, region, capital } = data
 
   const handleCardClick = () => {
-    handleShowDetailPage(alpha2Code)
+    navigate(`/${alpha2Code.toLowerCase()}`)
   }
 
   return (
