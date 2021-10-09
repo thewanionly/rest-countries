@@ -13,4 +13,10 @@ const fetchFromUrl = async url => {
   }
 }
 
-export { fetchFromUrl }
+const titleCase = str => {
+  if (!str) return str
+
+  return str[0].toUpperCase() + str.slice(1)
+}
+
+export { fetchFromUrl, titleCase }
