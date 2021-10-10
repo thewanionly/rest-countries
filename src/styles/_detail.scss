@@ -67,6 +67,10 @@
       align-items: center;
       gap: 1.5rem;
       overflow: hidden;
+
+      button {
+        margin: 0 0.5rem;
+      }
     }
 
     &__row {
