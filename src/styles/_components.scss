@@ -39,3 +39,25 @@
     }
   }
 }
+
+.search-bar {
+  width: 45%;
+  min-width: 30rem;
+  max-width: 45rem;
+  background-color: $color-white;
+  padding: 1.5rem 2.5rem;
+  border-radius: 0.4rem;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+
+  display: flex;
+  gap: 1rem;
+
+  input {
+    border: none;
+    width: 100%;
+
+    &:focus {
+      outline: none;
+    }
+  }
+}

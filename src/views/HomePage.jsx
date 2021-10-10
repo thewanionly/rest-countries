@@ -1,4 +1,5 @@
 import CountriesCard from 'components/CountriesCard'
+import SearchBar from 'components/SearchBar'
 
 const HomePage = ({
   filteredCountries,
@@ -13,10 +14,9 @@ const HomePage = ({
   return (
     <div className='home'>
       <div className='home__header'>
-        <input
-          type='text'
-          placeholder='Search for a country...'
+        <SearchBar
           value={searchTerm}
+          placeholder='Search for a country...'
           onChange={handleSearch}
         />
         <select value={filterTerm} onChange={handleFilterByRegion}>
