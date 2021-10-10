@@ -50,5 +50,21 @@ button {
       background-color: $color-blue-dark;
       color: $color-gray-light;
     }
+
+    .dark-mode-btn {
+      color: $color-white;
+
+      &:hover {
+        color: $color-gray-dark;
+
+        i {
+          color: $color-gray-dark;
+        }
+      }
+    }
+
+    .icon {
+      color: $color-gray-light;
+    }
   }
 }

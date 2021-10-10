@@ -61,6 +61,7 @@ const App = () => {
       <header className='navbar'>
         <h1>Where in the world?</h1>
         <Button
+          className='dark-mode-btn'
           label='Dark Mode'
           icon={{
             name: 'dark_mode',
