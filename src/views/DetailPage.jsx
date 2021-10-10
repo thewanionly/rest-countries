@@ -10,7 +10,7 @@ const DetailPage = () => {
   const [countryDetail, isLoading, error] = useLoadData(`${API_ENDPOINT}/alpha/${id}`)
 
   const handleBackClick = () => {
-    navigate(-1)
+    navigate('/')
   }
 
   const handleShowDetailPage = country => {
