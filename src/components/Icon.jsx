@@ -1,7 +1,16 @@
 import PropTypes from 'prop-types'
 
-const Icon = ({ className = '', name, type = '' }) => {
-  return <i className={`material-icons${type ? `-${type}` : ''} ${className}`}>{name}</i>
+const Icon = ({ className = '', name, type = '', onClick }) => {
+  return (
+    <i
+      className={`icon material-icons${type ? `-${type}` : ''} ${className} ${
+        onClick ? 'clickable' : ''
+      }`}
+      onClick={onClick}
+    >
+      {name}
+    </i>
+  )
 }
 
 Icon.propTypes = {
