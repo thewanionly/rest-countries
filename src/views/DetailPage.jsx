@@ -89,9 +89,7 @@ const CountryDetail = ({ data = {}, handleShowDetailPage }) => {
           <strong>Border Countries:</strong>
           {borders ? (
             borders?.map(border => (
-              <button key={border} onClick={() => handleShowDetailPage(border)}>
-                {border}
-              </button>
+              <Button key={border} label={border} onClick={() => handleShowDetailPage(border)} />
             ))
           ) : (
             <em>No border countries</em>
