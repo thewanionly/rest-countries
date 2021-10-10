@@ -6,7 +6,7 @@ const HomePage = ({
   error,
   loading,
   searchTerm,
-  handleSearch,
+  setSearchTerm,
   regions,
   filterTerm,
   handleFilterByRegion
@@ -17,7 +17,7 @@ const HomePage = ({
         <SearchBar
           value={searchTerm}
           placeholder='Search for a country...'
-          onChange={handleSearch}
+          onChange={setSearchTerm}
         />
         <select value={filterTerm} onChange={handleFilterByRegion}>
           {regions?.map(region => (

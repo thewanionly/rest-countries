@@ -24,10 +24,6 @@ const App = () => {
     setIsDarkMode(prev => !prev)
   }
 
-  const handleSearch = e => {
-    setSearchTerm(e.target.value)
-  }
-
   const handleFilterByRegion = e => {
     setFilterTerm(e.target.value)
   }
@@ -80,7 +76,7 @@ const App = () => {
                   error={error}
                   loading={isLoading}
                   searchTerm={searchTerm}
-                  handleSearch={handleSearch}
+                  setSearchTerm={setSearchTerm}
                   regions={regions}
                   filterTerm={filterTerm}
                   handleFilterByRegion={handleFilterByRegion}
