@@ -101,9 +101,14 @@
   padding: 1.5rem 2.5rem;
   border-radius: 0.4rem;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  transition: all 0.2s;
 
   display: flex;
   gap: 2rem;
+
+  &:hover {
+    box-shadow: rgba(99, 99, 99, 0.5) 0px 2px 8px 0px;
+  }
 
   input {
     border: none;
@@ -123,8 +128,13 @@
   padding: 1.5rem;
   border-radius: 0.4rem;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  transition: all 0.2s;
 
   display: flex;
+
+  &:hover {
+    box-shadow: rgba(99, 99, 99, 0.5) 0px 2px 8px 0px;
+  }
 
   select {
     border: none;
