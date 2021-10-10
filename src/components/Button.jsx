@@ -1,9 +1,14 @@
 import Icon from 'components/Icon'
 
-const Button = ({ className = '', label, icon, iconPos = 'right', onClick }) => {
+const Button = ({ className = '', label, icon, iconPos = 'right', onClick, isTransparent }) => {
+  const iconProps = typeof icon === 'object' ? { ...icon } : { name: icon }
+
   return (
-    <button className={`button ${className}`} onClick={onClick}>
-      {icon && <Icon name={icon} />}
+    <button
+      className={`button ${className} ${isTransparent ? 'transparent' : ''}`}
+      onClick={onClick}
+    >
+      {icon && <Icon {...iconProps} />}
       {label}
     </button>
   )
