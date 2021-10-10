@@ -9,6 +9,7 @@ import Button from 'components/Button'
 const DetailPage = () => {
   const navigate = useNavigate()
   const { id } = useParams()
+  const [countries, isLoadingCountries, errorCountries] = useLoadData(`${API_ENDPOINT}/all`)
   const [countryDetail, isLoading, error] = useLoadData(`${API_ENDPOINT}/alpha/${id}`)
 
   const handleBackClick = () => {
@@ -27,19 +28,28 @@ const DetailPage = () => {
         <Button label='Back' icon='arrow_back' onClick={handleBackClick} />
       </div>
       <div className='detail__content'>
-        {countryDetail && !error && !isLoading ? (
-          <CountryDetail data={countryDetail} handleShowDetailPage={handleShowDetailPage} />
-        ) : error ? (
-          <h1>{`There's an error: ${error}`}</h1>
+        {countryDetail &&
+        countries &&
+        !error &&
+        !errorCountries &&
+        !isLoading &&
+        !isLoadingCountries ? (
+          <CountryDetail
+            data={countryDetail}
+            allCountries={countries}
+            handleShowDetailPage={handleShowDetailPage}
+          />
+        ) : error || errorCountries ? (
+          <h1>{`There's an error: ${error || errorCountries}`}</h1>
         ) : (
-          isLoading && <h1>Loading...</h1>
+          (isLoading || isLoadingCountries) && <h1>Loading...</h1>
         )}
       </div>
     </div>
   )
 }
 
-const CountryDetail = ({ data = {}, handleShowDetailPage }) => {
+const CountryDetail = ({ data = {}, allCountries, handleShowDetailPage }) => {
   const {
     flag,
     name,
@@ -89,7 +99,15 @@ const CountryDetail = ({ data = {}, handleShowDetailPage }) => {
           <strong>Border Countries:</strong>
           {borders ? (
             borders?.map(border => (
-              <Button key={border} label={border} onClick={() => handleShowDetailPage(border)} />
+              <Button
+                key={border}
+                label={
+                  allCountries.find(
+                    ({ alpha2Code, alpha3Code }) => alpha2Code === border || alpha3Code === border
+                  )?.name || border
+                }
+                onClick={() => handleShowDetailPage(border)}
+              />
             ))
           ) : (
             <em>No border countries</em>
