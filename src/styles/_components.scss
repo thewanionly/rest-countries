@@ -1,3 +1,15 @@
+.icon {
+  color: $color-gray-dark;
+
+  &.clickable {
+    cursor: pointer;
+
+    &:hover {
+      color: $color-gray-darker;
+    }
+  }
+}
+
 .countries-card {
   height: 30rem;
   width: 25rem;
@@ -62,14 +74,23 @@
   }
 }
 
-.icon {
-  color: $color-gray-dark;
+.filter-dropdown {
+  width: 25%;
+  min-width: 20rem;
+  max-width: 25rem;
+  background-color: $color-white;
+  padding: 1.5rem;
+  border-radius: 0.4rem;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 
-  &.clickable {
-    cursor: pointer;
+  display: flex;
 
-    &:hover {
-      color: $color-gray-darker;
+  select {
+    border: none;
+    width: 100%;
+
+    &:focus {
+      outline: none;
     }
   }
 }

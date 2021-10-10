@@ -24,10 +24,6 @@ const App = () => {
     setIsDarkMode(prev => !prev)
   }
 
-  const handleFilterByRegion = e => {
-    setFilterTerm(e.target.value)
-  }
-
   // log only if countries changed
   useEffect(() => {
     console.log('App countries', countries)
@@ -79,7 +75,7 @@ const App = () => {
                   setSearchTerm={setSearchTerm}
                   regions={regions}
                   filterTerm={filterTerm}
-                  handleFilterByRegion={handleFilterByRegion}
+                  setFilterTerm={setFilterTerm}
                 />
               }
             />

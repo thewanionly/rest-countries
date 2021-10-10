@@ -1,5 +1,6 @@
 import CountriesCard from 'components/CountriesCard'
 import SearchBar from 'components/SearchBar'
+import FilterDropdown from 'components/FilterDropdown'
 
 const HomePage = ({
   filteredCountries,
@@ -9,7 +10,7 @@ const HomePage = ({
   setSearchTerm,
   regions,
   filterTerm,
-  handleFilterByRegion
+  setFilterTerm
 }) => {
   return (
     <div className='home'>
@@ -19,13 +20,12 @@ const HomePage = ({
           placeholder='Search for a country...'
           onChange={setSearchTerm}
         />
-        <select value={filterTerm} onChange={handleFilterByRegion}>
-          {regions?.map(region => (
-            <option key={region} value={region}>
-              {region}
-            </option>
-          ))}
-        </select>
+        <FilterDropdown
+          value={filterTerm}
+          placeholder='Filter by Region'
+          onChange={setFilterTerm}
+          options={regions}
+        />
       </div>
       <div className='home__content'>
         {filteredCountries ? (
