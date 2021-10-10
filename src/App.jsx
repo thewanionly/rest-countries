@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { API_ENDPOINT } from 'utilities/config'
 import { useLoadData } from 'utilities/hooks'
 
+import Button from 'components/Button'
 import HomePage from 'views/HomePage.jsx'
 import DetailPage from 'views/DetailPage.jsx'
 
@@ -59,7 +60,15 @@ const App = () => {
     <div className={`app${isDarkMode ? ' dark-mode' : ''}`}>
       <header className='navbar'>
         <h1>Where in the world?</h1>
-        <button onClick={handleSetColorMode}>Dark Mode</button>
+        <Button
+          label='Dark Mode'
+          icon={{
+            name: 'dark_mode',
+            type: 'outlined'
+          }}
+          isTransparent
+          onClick={handleSetColorMode}
+        />
       </header>
       <main className='main'>
         <Router>
