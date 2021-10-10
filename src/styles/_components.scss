@@ -15,6 +15,7 @@
   // min-width: 30rem;
   // max-width: 45rem;
   background-color: $color-white;
+  color: $color-blue-darkest;
   padding: 0.75rem 2rem;
   border-radius: 0.4rem;
   box-shadow: rgba(99, 99, 99, 0.5) 0px 2px 8px 0px;
@@ -27,9 +28,26 @@
   justify-content: center;
   gap: 1rem;
 
+  i {
+    color: $color-blue-darkest;
+  }
+
   &:hover {
-    transform: translateY(-0.2rem);
     box-shadow: rgba(99, 99, 99, 0.8) 0px 2px 8px 0px;
+  }
+
+  &.transparent {
+    background-color: transparent;
+    box-shadow: none;
+    color: $color-blue-darkest;
+
+    &:hover {
+      color: $color-blue-light;
+
+      i {
+        color: $color-blue-light;
+      }
+    }
   }
 }
 
