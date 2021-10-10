@@ -4,6 +4,8 @@ import { API_ENDPOINT } from 'utilities/config'
 import { useLoadData } from 'utilities/hooks'
 import { camelCaseToStandardFormat } from 'utilities/helpers'
 
+import Button from 'components/Button'
+
 const DetailPage = () => {
   const navigate = useNavigate()
   const { id } = useParams()
@@ -22,7 +24,7 @@ const DetailPage = () => {
   return (
     <div className='detail'>
       <div className='detail__header'>
-        <button onClick={handleBackClick}>Back</button>
+        <Button label='Back' icon='arrow_back' onClick={handleBackClick} />
       </div>
       <div className='detail__content'>
         {countryDetail && !error && !isLoading ? (
