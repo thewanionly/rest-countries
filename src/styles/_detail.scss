@@ -15,6 +15,7 @@
   justify-content: space-between;
   align-items: center;
   gap: 10rem;
+  flex-wrap: wrap;
 
   height: 50rem;
   width: 100%;
@@ -33,7 +34,8 @@
 
   &__details {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+
+    grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
     grid-template-rows: repeat(3, min-content);
     grid-template-areas:
       'name name'
