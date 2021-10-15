@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react'
 
 import { fetchFromUrl } from 'utilities/helpers'
 
+const toAlwaysFetch = false //for dev/testing purposes only, set to default in production
+
 const useLoadData = url => {
   const [data, setData] = useState()
   const [error, setError] = useState(false)
@@ -15,7 +17,7 @@ const useLoadData = url => {
         setIsLoading(true)
 
         // Get data from localStorage
-        let data = localStorage.getItem(url)
+        let data = !toAlwaysFetch && localStorage.getItem(url)
 
         if (data) {
           // Parse data from localStorage to JS object
@@ -25,7 +27,7 @@ const useLoadData = url => {
           data = await fetchFromUrl(url)
 
           // Store data in localStorage
-          localStorage.setItem(url, JSON.stringify(data))
+          !toAlwaysFetch && localStorage.setItem(url, JSON.stringify(data))
         }
 
         // Set data
