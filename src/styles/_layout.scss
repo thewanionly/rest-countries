@@ -11,5 +11,6 @@
 .main {
   width: 90vw;
   margin: 4rem auto;
-  min-height: calc(100vh - 7.25rem);
+  min-height: calc(100vh - 7.25rem - 4rem);
+  margin-bottom: 0;
 }

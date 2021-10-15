@@ -15,4 +15,10 @@
     justify-items: center;
     gap: 5rem;
   }
+
+  &__footer {
+    display: flex;
+    padding: 4rem 0;
+    justify-content: center;
+  }
 }
