@@ -1,9 +1,12 @@
 import { useNavigate } from 'react-router-dom'
+import { titleCase } from 'utilities/helpers'
 
-const CountriesCard = ({ data = {} }) => {
+const CountriesCard = ({ data = {}, loading }) => {
   const navigate = useNavigate()
 
   const { alpha2Code, flag, name, population, region, capital } = data
+  const imgLoadingClassName = loading ? ' skeleton' : ''
+  const textLoadingClassName = loading ? ' skeleton skeleton-text' : ''
 
   const handleCardClick = () => {
     navigate(`/${alpha2Code.toLowerCase()}`)
@@ -11,23 +14,19 @@ const CountriesCard = ({ data = {} }) => {
 
   return (
     <div className='countries-card' onClick={handleCardClick}>
-      <div className='countries-card__flag'>
+      <div className={`countries-card__flag${imgLoadingClassName}`}>
         <img className='countries-card__flag__img' src={flag} alt={name} />
       </div>
       <div className='countries-card__details'>
-        <h3 className='countries-card__details__name'>{name}</h3>
-        <div className='countries-card__details__population'>
-          <strong>Population: </strong>
-          {population}
+        <div className={`countries-card__details__main${textLoadingClassName}`}>
+          <h3>{name}</h3>
         </div>
-        <div className='countries-card__details__region'>
-          <strong>Region: </strong>
-          {region}
-        </div>
-        <div className='countries-card__details__capital'>
-          <strong>Capital: </strong>
-          {capital}
-        </div>
+        {Object.entries({ population, region, capital }).map(([label, value]) => (
+          <div className='countries-card__details__sub'>
+            <strong>{`${titleCase(label)}:`}</strong>
+            <span className={textLoadingClassName}>{value}</span>
+          </div>
+        ))}
       </div>
     </div>
   )

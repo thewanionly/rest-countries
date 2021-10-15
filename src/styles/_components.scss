@@ -78,17 +78,21 @@
     height: 55%;
     padding: 2.5rem;
 
-    &__name {
+    &__main {
       margin-bottom: 2rem;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
     }
 
-    &__population,
-    &__region,
-    &__capital {
+    &__sub {
       margin-bottom: 0.75em;
+      display: flex;
+      gap: 0.5rem;
+
+      span {
+        width: 100%;
+      }
     }
   }
 }

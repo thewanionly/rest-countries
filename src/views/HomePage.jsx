@@ -6,6 +6,7 @@ import FilterDropdown from 'components/FilterDropdown'
 import Button from 'components/Button'
 
 const PAGE_LIMIT = 10
+const DUMMY_LIST = [...new Array(PAGE_LIMIT)]
 
 const HomePage = ({
   filteredCountries,
@@ -46,7 +47,8 @@ const HomePage = ({
         ) : error ? (
           <h1>{`There's an error: ${error}`}</h1>
         ) : (
-          loading && <h1>Loading...</h1>
+          loading &&
+          DUMMY_LIST.map((item, index) => <CountriesCard key={index} data={item} loading />)
         )}
       </div>
       <div className='home__footer'>
