@@ -2,7 +2,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 
 import { API_ENDPOINT } from 'utilities/config'
 import { useLoadData } from 'utilities/hooks'
-import { camelCaseToStandardFormat } from 'utilities/helpers'
+import { camelCaseToStandardFormat, formatNumber } from 'utilities/helpers'
 
 import Button from 'components/Button'
 
@@ -87,16 +87,20 @@ const CountryDetail = ({ data = {}, allCountries, handleShowDetailPage, loading 
           <h1>{name}</h1>
         </div>
         <div className='country-detail__details__left'>
-          {Object.entries({ nativeName, population, region, subregion, capital }).map(
-            ([label, value], index) => (
-              <CountryDetailRow
-                key={label + value + index}
-                label={formatLabel(label)}
-                value={value}
-                loading={loading}
-              />
-            )
-          )}
+          {Object.entries({
+            nativeName,
+            population: formatNumber(population),
+            region,
+            subregion,
+            capital
+          }).map(([label, value], index) => (
+            <CountryDetailRow
+              key={label + value + index}
+              label={formatLabel(label)}
+              value={value}
+              loading={loading}
+            />
+          ))}
         </div>
         <div className='country-detail__details__right'>
           {Object.entries({

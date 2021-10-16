@@ -1,3 +1,5 @@
+import { USER_LOCALE } from 'utilities/config'
+
 // fetch from API
 const fetchFromUrl = async url => {
   try {
@@ -27,4 +29,9 @@ const camelCaseToStandardFormat = (str, separator = ' ') => {
   return titleCase(str.split(/(?=[A-Z])/).join(separator))
 }
 
-export { fetchFromUrl, titleCase, camelCaseToStandardFormat }
+// formats number depending on locale
+const formatNumber = (number, locale = USER_LOCALE) => {
+  return new Intl.NumberFormat(locale).format(number)
+}
+
+export { fetchFromUrl, titleCase, camelCaseToStandardFormat, formatNumber }
