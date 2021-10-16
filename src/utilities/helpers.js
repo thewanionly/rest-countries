@@ -1,11 +1,22 @@
-import { USER_LOCALE } from 'utilities/config'
+import { USER_LOCALE, TIMEOUT_SEC } from 'utilities/config'
+
+/**
+ * Promisifed timeout
+ */
+const timeout = function (sec) {
+  return new Promise((_, reject) => {
+    setTimeout(() => {
+      reject(new Error(`Request took too long! Timeout after ${sec} second. Please try again.`))
+    }, sec * 1000)
+  })
+}
 
 /**
  * fetch from API
  */
 const fetchFromUrl = async url => {
   try {
-    const response = await fetch(url)
+    const response = await Promise.race([fetch(url), timeout(TIMEOUT_SEC)])
     const data = await response.json()
 
     if (!response.ok) throw new Error(`Error fetching (${response.status})`)
