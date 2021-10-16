@@ -31,6 +31,8 @@ const camelCaseToStandardFormat = (str, separator = ' ') => {
 
 // formats number depending on locale
 const formatNumber = (number, locale = USER_LOCALE) => {
+  if (!number) return ''
+
   return new Intl.NumberFormat(locale).format(number)
 }
 
