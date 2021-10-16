@@ -90,7 +90,7 @@ const CountryDetail = ({ data = {}, allCountries, handleShowDetailPage, loading 
           {Object.entries({ nativeName, population, region, subregion, capital }).map(
             ([label, value], index) => (
               <CountryDetailRow
-                key={value + index}
+                key={label + value + index}
                 label={formatLabel(label)}
                 value={value}
                 loading={loading}
@@ -105,7 +105,7 @@ const CountryDetail = ({ data = {}, allCountries, handleShowDetailPage, loading 
             languages: languages?.map(({ name }) => name).join(', ') || ''
           }).map(([label, value], index) => (
             <CountryDetailRow
-              key={value + index}
+              key={label + value + index}
               label={formatLabel(label)}
               value={value}
               loading={loading}

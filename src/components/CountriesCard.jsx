@@ -21,8 +21,8 @@ const CountriesCard = ({ data = {}, loading }) => {
         <div className={`countries-card__details__main${textLoadingClassName}`}>
           <h3>{name}</h3>
         </div>
-        {Object.entries({ population, region, capital }).map(([label, value]) => (
-          <div className='countries-card__details__sub'>
+        {Object.entries({ population, region, capital }).map(([label, value], index) => (
+          <div key={label + value + index} className='countries-card__details__sub'>
             <strong className='countries-card__details__sub--label'>{`${titleCase(
               label
             )}:`}</strong>
