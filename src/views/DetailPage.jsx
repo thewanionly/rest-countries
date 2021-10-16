@@ -6,6 +6,8 @@ import { camelCaseToStandardFormat } from 'utilities/helpers'
 
 import Button from 'components/Button'
 
+const DUMMY_BUTTONS = [...new Array(3)]
+
 const DetailPage = () => {
   const navigate = useNavigate()
   const { id } = useParams()
@@ -42,14 +44,14 @@ const DetailPage = () => {
         ) : error || errorCountries ? (
           <h1>{`There's an error: ${error || errorCountries}`}</h1>
         ) : (
-          (isLoading || isLoadingCountries) && <h1>Loading...</h1>
+          (isLoading || isLoadingCountries) && <CountryDetail loading />
         )}
       </div>
     </div>
   )
 }
 
-const CountryDetail = ({ data = {}, allCountries, handleShowDetailPage }) => {
+const CountryDetail = ({ data = {}, allCountries, handleShowDetailPage, loading }) => {
   const {
     flag,
     name,
@@ -63,6 +65,9 @@ const CountryDetail = ({ data = {}, allCountries, handleShowDetailPage }) => {
     languages,
     borders
   } = data
+  const imgLoadingClassName = loading ? ' skeleton' : ''
+  const bigTextLoadingClassName = loading ? ' skeleton skeleton-text skeleton-text--big' : ''
+  const buttonLoadingClassName = loading ? ' skeleton skeleton-button' : ''
 
   const formatLabel = label => {
     if (label === 'subregion') {
@@ -74,15 +79,22 @@ const CountryDetail = ({ data = {}, allCountries, handleShowDetailPage }) => {
 
   return (
     <div className='country-detail'>
-      <div className='country-detail__flag'>
+      <div className={`country-detail__flag${imgLoadingClassName}`}>
         <img className='country-detail__flag__img' src={flag} alt={name} />
       </div>
       <div className='country-detail__details'>
-        <h1 className='country-detail__details__name'>{name}</h1>
+        <div className={`country-detail__details__name${bigTextLoadingClassName}`}>
+          <h1>{name}</h1>
+        </div>
         <div className='country-detail__details__left'>
           {Object.entries({ nativeName, population, region, subregion, capital }).map(
-            ([label, value]) => (
-              <CountryDetailRow key={value} label={formatLabel(label)} value={value} />
+            ([label, value], index) => (
+              <CountryDetailRow
+                key={value + index}
+                label={formatLabel(label)}
+                value={value}
+                loading={loading}
+              />
             )
           )}
         </div>
@@ -91,16 +103,25 @@ const CountryDetail = ({ data = {}, allCountries, handleShowDetailPage }) => {
             topLevelDomain: topLevelDomain?.join(', ') || '',
             currencies: currencies?.map(({ name }) => name).join(', ') || '',
             languages: languages?.map(({ name }) => name).join(', ') || ''
-          }).map(([label, value]) => (
-            <CountryDetailRow key={value} label={formatLabel(label)} value={value} />
+          }).map(([label, value], index) => (
+            <CountryDetailRow
+              key={value + index}
+              label={formatLabel(label)}
+              value={value}
+              loading={loading}
+            />
           ))}
         </div>
         <div className='country-detail__details__border-countries'>
           <strong>Border Countries:</strong>
-          {borders ? (
-            borders?.map(border => (
+          {loading ? (
+            DUMMY_BUTTONS?.map((b, index) => (
+              <Button key={index} className={buttonLoadingClassName} />
+            ))
+          ) : borders ? (
+            borders?.map((border, index) => (
               <Button
-                key={border}
+                key={border + index}
                 label={
                   allCountries.find(
                     ({ alpha2Code, alpha3Code }) => alpha2Code === border || alpha3Code === border
@@ -118,11 +139,13 @@ const CountryDetail = ({ data = {}, allCountries, handleShowDetailPage }) => {
   )
 }
 
-const CountryDetailRow = ({ label, value }) => {
+const CountryDetailRow = ({ label, value, loading }) => {
+  const textLoadingClassName = loading ? ' skeleton skeleton-text' : ''
+
   return (
     <div className='country-detail__details__row'>
       <strong>{`${label}: `}</strong>
-      <span>{value}</span>
+      <span className={textLoadingClassName}>{value}</span>
     </div>
   )
 }

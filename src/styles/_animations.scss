@@ -5,8 +5,17 @@
 
 .skeleton-text {
   width: 100%;
-  height: 1.6rem;
+  height: 2rem;
   border-radius: 0.3rem;
+
+  &--big {
+    height: 3.2rem;
+  }
+}
+
+.skeleton-button {
+  width: 18%;
+  height: 3rem;
 }
 
 @keyframes skeletion-loading {

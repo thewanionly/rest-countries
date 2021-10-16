@@ -78,6 +78,15 @@
     &__row {
       margin-bottom: 1em;
       line-height: 1.5;
+      display: flex;
+      gap: 0.5rem;
+
+      span {
+        flex: 1;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
     }
   }
 }
