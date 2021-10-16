@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 
-import { API_ENDPOINT } from 'utilities/config'
+import { API_ENDPOINT, PAGE_LIMIT } from 'utilities/config'
 import { useLoadData } from 'utilities/hooks'
 
 import Button from 'components/Button'
@@ -14,6 +14,7 @@ const App = () => {
   const [isDarkMode, setIsDarkMode] = useState(false)
   const [searchTerm, setSearchTerm] = useState('')
   const [filterTerm, setFilterTerm] = useState('')
+  const [limit, setLimit] = useState(PAGE_LIMIT)
 
   const filteredCountries = countries?.filter(
     ({ name, region }) =>
@@ -23,6 +24,10 @@ const App = () => {
 
   const handleSetColorMode = () => {
     setIsDarkMode(prev => !prev)
+  }
+
+  const handleShowMore = () => {
+    setLimit(prevValue => prevValue + PAGE_LIMIT)
   }
 
   // log only if countries changed
@@ -83,6 +88,8 @@ const App = () => {
                   regions={regions}
                   filterTerm={filterTerm}
                   setFilterTerm={setFilterTerm}
+                  limit={limit}
+                  handleShowMore={handleShowMore}
                 />
               }
             />

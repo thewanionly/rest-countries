@@ -1,11 +1,10 @@
-import { useState } from 'react'
+import { PAGE_LIMIT } from 'utilities/config'
 
 import CountriesCard from 'components/CountriesCard'
 import SearchBar from 'components/SearchBar'
 import FilterDropdown from 'components/FilterDropdown'
 import Button from 'components/Button'
 
-const PAGE_LIMIT = 10
 const DUMMY_LIST = [...new Array(PAGE_LIMIT)]
 
 const HomePage = ({
@@ -16,14 +15,10 @@ const HomePage = ({
   setSearchTerm,
   regions,
   filterTerm,
-  setFilterTerm
+  setFilterTerm,
+  limit,
+  handleShowMore
 }) => {
-  const [limit, setLimit] = useState(PAGE_LIMIT)
-
-  const handleShowMore = () => {
-    setLimit(prevValue => prevValue + PAGE_LIMIT)
-  }
-
   return (
     <div className='home'>
       <div className='home__header'>
