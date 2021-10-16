@@ -66,7 +66,9 @@ const CountryDetail = ({ data = {}, allCountries, handleShowDetailPage, loading 
     borders
   } = data
   const imgLoadingClassName = loading ? ' skeleton' : ''
-  const bigTextLoadingClassName = loading ? ' skeleton skeleton-text skeleton-text--big' : ''
+  const bigTextLoadingClassName = loading
+    ? ' skeleton skeleton-text skeleton-text--big skeleton-text--half-width'
+    : ''
   const buttonLoadingClassName = loading ? ' skeleton skeleton-button' : ''
 
   const formatLabel = label => {
