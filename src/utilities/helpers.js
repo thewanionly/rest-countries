@@ -1,6 +1,8 @@
 import { USER_LOCALE } from 'utilities/config'
 
-// fetch from API
+/**
+ * fetch from API
+ */
 const fetchFromUrl = async url => {
   try {
     const response = await fetch(url)
@@ -15,21 +17,27 @@ const fetchFromUrl = async url => {
   }
 }
 
-// converts first letter of a string to uppercase
+/**
+ * converts first letter of a string to uppercase
+ */
 const titleCase = str => {
   if (!str) return str
 
   return str[0].toUpperCase() + str.slice(1)
 }
 
-// converts "camelCase" to "Standard Format"
+/**
+ * converts "camelCase" to "Standard Format"
+ */
 const camelCaseToStandardFormat = (str, separator = ' ') => {
   if (!str) return str
 
   return titleCase(str.split(/(?=[A-Z])/).join(separator))
 }
 
-// formats number depending on locale
+/**
+ * formats number depending on locale
+ */
 const formatNumber = (number, locale = USER_LOCALE) => {
   if (!number) return ''
 
