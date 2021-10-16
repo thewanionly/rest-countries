@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 
 import Icon from 'components/Icon'
 
@@ -9,6 +9,7 @@ const FilterDropdown = ({
   onChange: handleSetFilterValue
 }) => {
   const [isOptionsOpen, setIsOptionsOpen] = useState(false)
+  const dropdownRef = useRef()
 
   const handleToggleOptions = () => {
     setIsOptionsOpen(prevValue => !prevValue)
@@ -19,8 +20,23 @@ const FilterDropdown = ({
     setIsOptionsOpen(false)
   }
 
+  // Close dropdown options when user clicked outside
+  useEffect(() => {
+    const handleClick = e => {
+      if (dropdownRef?.current && !dropdownRef.current.contains(e.target)) {
+        setIsOptionsOpen(false)
+      }
+    }
+
+    window.addEventListener('click', handleClick)
+
+    return () => {
+      window.removeEventListener('click', handleClick)
+    }
+  }, [dropdownRef, setIsOptionsOpen])
+
   return (
-    <div className='filter-dropdown'>
+    <div className='filter-dropdown' ref={dropdownRef}>
       <div className='filter-dropdown__select' onClick={handleToggleOptions}>
         <div className='filter-dropdown__select__text'>{value || placeholder}</div>
         <Icon
