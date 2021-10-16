@@ -81,7 +81,7 @@
       display: flex;
       gap: 0.5rem;
 
-      span {
+      &--value {
         flex: 1;
         white-space: nowrap;
         overflow: hidden;

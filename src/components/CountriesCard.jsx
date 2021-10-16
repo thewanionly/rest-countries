@@ -23,8 +23,12 @@ const CountriesCard = ({ data = {}, loading }) => {
         </div>
         {Object.entries({ population, region, capital }).map(([label, value]) => (
           <div className='countries-card__details__sub'>
-            <strong>{`${titleCase(label)}:`}</strong>
-            <span className={textLoadingClassName}>{value}</span>
+            <strong className='countries-card__details__sub--label'>{`${titleCase(
+              label
+            )}:`}</strong>
+            <span className={`countries-card__details__sub--value${textLoadingClassName}`}>
+              {value}
+            </span>
           </div>
         ))}
       </div>

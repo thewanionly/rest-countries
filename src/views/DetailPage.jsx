@@ -144,8 +144,8 @@ const CountryDetailRow = ({ label, value, loading }) => {
 
   return (
     <div className='country-detail__details__row'>
-      <strong>{`${label}: `}</strong>
-      <span className={textLoadingClassName}>{value}</span>
+      <strong className='country-detail__details__row--label'>{`${label}: `}</strong>
+      <span className={`country-detail__details__row--value${textLoadingClassName}`}>{value}</span>
     </div>
   )
 }
