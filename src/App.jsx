@@ -31,18 +31,15 @@ const App = () => {
 
     if (countries) {
       // Set regions
-      const allRegions = countries.reduce(
-        (regions, country) => {
-          if (!regions?.includes(country.region)) {
-            return [...regions, country.region]
-          } else {
-            return regions
-          }
-        },
-        ['Show all']
-      )
+      const allRegions = countries.reduce((regions, country) => {
+        if (!regions?.includes(country.region)) {
+          return [...regions, country.region]
+        } else {
+          return regions
+        }
+      }, [])
 
-      setRegions(allRegions)
+      setRegions([...allRegions, 'Show all'])
     }
   }, [countries])
 
