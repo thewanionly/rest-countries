@@ -49,6 +49,10 @@ $bp-mobile: 23.4375em; // 375px / 16 = 23.4375em
 html {
   box-sizing: border-box;
   font-size: 62.5%; //1rem = 10px 10px/16px = 62.5%
+
+  @media only screen and (max-width: $bp-mobile) {
+    font-size: 50%;
+  }
 }
 
 body {

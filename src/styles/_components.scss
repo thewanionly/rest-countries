@@ -37,6 +37,7 @@
     background-color: transparent;
     box-shadow: none;
     color: var(--text-color-primary);
+    padding: 0;
 
     &:hover {
       color: var(--text-color-primary-hover);
@@ -49,8 +50,8 @@
 }
 
 .countries-card {
-  height: 30rem;
-  width: 25rem;
+  height: 37rem;
+  width: 31rem;
   background-color: var(--bg-color-secondary);
   color: var(--text-color-primary);
   box-shadow: $box-shadow;
@@ -153,7 +154,7 @@
 
     width: 100%;
     background-color: var(--bg-color-secondary);
-    padding: 1.5rem;
+    padding: 1.5rem 2.5rem;
     border-radius: 0.4rem;
     box-shadow: $box-shadow;
     transition: all 0.2s;
@@ -175,7 +176,7 @@
     z-index: 2;
     width: 100%;
     background-color: var(--bg-color-secondary);
-    padding: 1.5rem;
+    padding: 1.5rem 2.5rem;
     border-radius: 0.4rem;
     box-shadow: $box-shadow;
     transition: all 0.2s;
@@ -189,7 +190,7 @@
     }
 
     &__item {
-      padding: 0.8rem;
+      padding: 0.8rem 0;
 
       &.break {
         margin-top: 0.2rem;
@@ -200,6 +201,10 @@
       &:hover {
         color: var(--text-color-primary-hover);
       }
+    }
+
+    @media only screen and (max-width: $bp-mobile) {
+      top: 6.5rem;
     }
   }
 }

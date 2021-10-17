@@ -6,12 +6,20 @@
     justify-content: space-between;
     gap: 5rem;
     flex-wrap: wrap;
+
+    .search-bar {
+      flex: 1;
+    }
+
+    .filter-dropdown {
+      flex: 1;
+    }
   }
 
   &__content {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(31rem, 1fr));
     justify-items: center;
     gap: 5rem;
   }
