@@ -35,15 +35,15 @@ const HomePage = ({
         />
       </div>
       <div className='home__content'>
-        {filteredCountries ? (
-          filteredCountries
-            .slice(0, limit)
-            .map(country => <CountriesCard key={country.alpha2Code} data={country} />)
+        {loading ? (
+          DUMMY_LIST.map((item, index) => <CountriesCard key={index} data={item} loading />)
         ) : error ? (
           <h1>{`There's an error: ${error}`}</h1>
         ) : (
-          loading &&
-          DUMMY_LIST.map((item, index) => <CountriesCard key={index} data={item} loading />)
+          filteredCountries &&
+          filteredCountries
+            .slice(0, limit)
+            .map(country => <CountriesCard key={country.alpha2Code} data={country} />)
         )}
       </div>
       <div className='home__footer'>

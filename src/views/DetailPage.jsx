@@ -30,21 +30,19 @@ const DetailPage = () => {
         <Button label='Back' icon='arrow_back' onClick={handleBackClick} />
       </div>
       <div className='detail__content'>
-        {countryDetail &&
-        countries &&
-        !error &&
-        !errorCountries &&
-        !isLoading &&
-        !isLoadingCountries ? (
-          <CountryDetail
-            data={countryDetail}
-            allCountries={countries}
-            handleShowDetailPage={handleShowDetailPage}
-          />
+        {isLoading || isLoadingCountries ? (
+          <CountryDetail loading />
         ) : error || errorCountries ? (
           <h1>{`There's an error: ${error || errorCountries}`}</h1>
         ) : (
-          (isLoading || isLoadingCountries) && <CountryDetail loading />
+          countryDetail &&
+          countries && (
+            <CountryDetail
+              data={countryDetail}
+              allCountries={countries}
+              handleShowDetailPage={handleShowDetailPage}
+            />
+          )
         )}
       </div>
     </div>
