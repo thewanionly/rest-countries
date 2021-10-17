@@ -51,4 +51,29 @@ const useLoadData = url => {
   return [data, isLoading, error]
 }
 
-export { useLoadData }
+const useDarkMode = () => {
+  // 1. Get data from localStorage
+  let isDarkModeInLocalStorage = localStorage.getItem('darkMode')
+  isDarkModeInLocalStorage = isDarkModeInLocalStorage && JSON.parse(isDarkModeInLocalStorage) // Parse data from localStorage to JS object
+
+  // 2. Get data from browser theme
+  const isDarkModeInBrowser = window.matchMedia('(prefers-color-scheme: dark)').matches
+
+  // 3. Declare darkMode state (default value from localStorage -> browser -> false)
+  const [darkMode, setDarkMode] = useState(isDarkModeInLocalStorage ?? isDarkModeInBrowser ?? false)
+
+  // 4. Dark mode flag toggle handler
+  const handleToggleDarkMode = () => {
+    const newValue = !darkMode
+
+    // Set darkMode state
+    setDarkMode(newValue)
+
+    // Store new darkMode value to localStorage
+    localStorage.setItem('darkMode', JSON.stringify(newValue))
+  }
+
+  return [darkMode, handleToggleDarkMode]
+}
+
+export { useLoadData, useDarkMode }

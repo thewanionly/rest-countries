@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 
 import { API_ENDPOINT, PAGE_LIMIT } from 'utilities/config'
-import { useLoadData } from 'utilities/hooks'
+import { useLoadData, useDarkMode } from 'utilities/hooks'
 
 import Button from 'components/Button'
 import HomePage from 'views/HomePage.jsx'
@@ -10,8 +10,8 @@ import DetailPage from 'views/DetailPage.jsx'
 
 const App = () => {
   const [countries, isLoading, error] = useLoadData(`${API_ENDPOINT}/all`)
+  const [isDarkMode, toggleDarkMode] = useDarkMode()
   const [regions, setRegions] = useState()
-  const [isDarkMode, setIsDarkMode] = useState(false)
   const [searchTerm, setSearchTerm] = useState('')
   const [filterTerm, setFilterTerm] = useState('')
   const [limit, setLimit] = useState(PAGE_LIMIT)
@@ -21,10 +21,6 @@ const App = () => {
       name.toLowerCase().includes(searchTerm.toLocaleLowerCase()) &&
       (!filterTerm || filterTerm === 'Show all' || region === filterTerm)
   )
-
-  const handleSetColorMode = () => {
-    setIsDarkMode(prev => !prev)
-  }
 
   const handleShowMore = () => {
     setLimit(prevValue => prevValue + PAGE_LIMIT)
@@ -70,7 +66,7 @@ const App = () => {
             type: !isDarkMode ? 'outlined' : ''
           }}
           isTransparent
-          onClick={handleSetColorMode}
+          onClick={toggleDarkMode}
         />
       </header>
       <main className='main'>
