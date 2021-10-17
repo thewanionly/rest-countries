@@ -1,21 +1,18 @@
 .icon {
-  color: $color-gray-dark;
+  color: var(--text-color-primary);
 
   &.clickable {
     cursor: pointer;
 
     &:hover {
-      color: $color-gray-darker;
+      color: var(--text-color-primary-hover);
     }
   }
 }
 
 .button {
-  // width: 45%;
-  // min-width: 30rem;
-  // max-width: 45rem;
-  background-color: $color-white;
-  color: $color-blue-darkest;
+  background-color: var(--bg-color-secondary);
+  color: var(--text-color-primary);
   padding: 0.75rem 2rem;
   border-radius: 0.4rem;
   box-shadow: rgba(99, 99, 99, 0.5) 0px 2px 8px 0px;
@@ -29,7 +26,7 @@
   gap: 1rem;
 
   i {
-    color: $color-blue-darkest;
+    color: var(--text-color-primary);
   }
 
   &:hover {
@@ -39,13 +36,13 @@
   &.transparent {
     background-color: transparent;
     box-shadow: none;
-    color: $color-blue-darkest;
+    color: var(--text-color-primary);
 
     &:hover {
-      color: $color-blue-light;
+      color: var(--text-color-primary-hover);
 
       i {
-        color: $color-blue-light;
+        color: var(--text-color-primary-hover);
       }
     }
   }
@@ -54,7 +51,8 @@
 .countries-card {
   height: 30rem;
   width: 25rem;
-  background-color: $color-white;
+  background-color: var(--bg-color-secondary);
+  color: var(--text-color-primary);
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
   border-radius: 0.4rem;
   cursor: pointer;
@@ -105,7 +103,8 @@
   width: 45%;
   min-width: 30rem;
   max-width: 45rem;
-  background-color: $color-white;
+  background-color: var(--bg-color-secondary);
+  color: var(--text-color-secondary);
   padding: 1.5rem 2.5rem;
   border-radius: 0.4rem;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
@@ -118,9 +117,19 @@
     box-shadow: rgba(99, 99, 99, 0.5) 0px 2px 8px 0px;
   }
 
+  .icon {
+    color: var(--text-color-secondary);
+  }
+
   input {
     border: none;
     width: 100%;
+    background: transparent;
+    color: var(--text-color-secondary);
+
+    &::placeholder {
+      color: var(--text-color-secondary);
+    }
 
     &:focus {
       outline: none;
@@ -135,6 +144,7 @@
   max-width: 25rem;
   position: relative;
   user-select: none;
+  color: var(--text-color-primary);
 
   &__select {
     display: flex;
@@ -142,7 +152,7 @@
     align-items: center;
 
     width: 100%;
-    background-color: $color-white;
+    background-color: var(--bg-color-secondary);
     padding: 1.5rem;
     border-radius: 0.4rem;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
@@ -153,7 +163,7 @@
     }
 
     &__arrow-icon {
-      color: $color-blue-darkest;
+      color: var(--text-color-primary);
     }
   }
 
@@ -164,7 +174,7 @@
 
     z-index: 2;
     width: 100%;
-    background-color: $color-white;
+    background-color: var(--bg-color-secondary);
     padding: 1.5rem;
     border-radius: 0.4rem;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
@@ -188,7 +198,7 @@
       }
 
       &:hover {
-        color: $color-blue-light;
+        color: var(--text-color-primary-hover);
       }
     }
   }

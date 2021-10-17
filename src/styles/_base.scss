@@ -4,7 +4,6 @@ $color-blue-darker: hsl(207, 26%, 17%); //Very Dark Blue (Dark Mode Background)
 $color-blue-darkest: hsl(200, 15%, 8%); //Very Dark Blue (Light Mode Text)
 $color-blue-light: hsl(209, 23%, 40%);
 $color-gray-dark: hsl(0, 0%, 52%); //Dark Gray (Light Mode Input)
-$color-gray-darker: hsl(0, 0%, 45%);
 $color-gray-light: hsl(0, 0%, 98%); //Very Light Gray (Light Mode Background)
 $color-white: hsl(0, 0%, 100%); //White (Dark Mode Text & Light Mode Elements)
 
@@ -16,6 +15,15 @@ $font-size-2: 1.6rem;
 // Breakpoints
 $bp-desktop: 90em; // 1440px / 16 = 90em
 $bp-mobile: 23.4375em; // 375px / 16 = 23.4375em
+
+// light mode (default)
+:root {
+  --bg-color-primary: #{$color-gray-light};
+  --bg-color-secondary: #{$color-white};
+  --text-color-primary: #{$color-blue-darkest};
+  --text-color-primary-hover: #{$color-blue-light};
+  --text-color-secondary: #{$color-gray-dark};
+}
 
 *,
 *::before,
@@ -41,30 +49,14 @@ button {
 }
 
 .app {
-  background-color: $color-gray-light;
+  background-color: var(--bg-color-primary);
 
+  // dark mode
   &.dark-mode {
-    background-color: $color-blue-darker;
-
-    .navbar {
-      background-color: $color-blue-dark;
-      color: $color-gray-light;
-    }
-
-    .dark-mode-btn {
-      color: $color-white;
-
-      &:hover {
-        color: $color-gray-dark;
-
-        i {
-          color: $color-gray-dark;
-        }
-      }
-    }
-
-    .icon {
-      color: $color-gray-light;
-    }
+    --bg-color-primary: #{$color-blue-darker};
+    --bg-color-secondary: #{$color-blue-dark};
+    --text-color-primary: #{$color-white};
+    --text-color-primary-hover: #{$color-gray-light};
+    --text-color-secondary: #{$color-white};
   }
 }
