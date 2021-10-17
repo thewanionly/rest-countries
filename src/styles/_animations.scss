@@ -24,10 +24,10 @@
 
 @keyframes skeletion-loading {
   0% {
-    background-color: hsl(200, 20%, 70%);
+    background-color: var(--bg-color-skeleton-start);
   }
 
   100% {
-    background-color: hsl(200, 20%, 85%);
+    background-color: var(--bg-color-skeleton-end);
   }
 }

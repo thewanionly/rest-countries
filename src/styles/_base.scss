@@ -3,6 +3,8 @@ $color-blue-dark: hsl(209, 23%, 22%); //Dark Blue (Dark Mode Elements)
 $color-blue-darker: hsl(207, 26%, 17%); //Very Dark Blue (Dark Mode Background)
 $color-blue-darkest: hsl(200, 15%, 8%); //Very Dark Blue (Light Mode Text)
 $color-blue-light: hsl(209, 23%, 40%);
+$color-blue-lighter: hsl(200, 20%, 70%);
+$color-blue-lightest: hsl(200, 20%, 85%);
 $color-gray-dark: hsl(0, 0%, 52%); //Dark Gray (Light Mode Input)
 $color-gray-light: hsl(0, 0%, 98%); //Very Light Gray (Light Mode Background)
 $color-white: hsl(0, 0%, 100%); //White (Dark Mode Text & Light Mode Elements)
@@ -20,6 +22,8 @@ $bp-mobile: 23.4375em; // 375px / 16 = 23.4375em
 :root {
   --bg-color-primary: #{$color-gray-light};
   --bg-color-secondary: #{$color-white};
+  --bg-color-skeleton-start: #{$color-blue-lighter};
+  --bg-color-skeleton-end: #{$color-blue-lightest};
   --text-color-primary: #{$color-blue-darkest};
   --text-color-primary-hover: #{$color-blue-light};
   --text-color-secondary: #{$color-gray-dark};
