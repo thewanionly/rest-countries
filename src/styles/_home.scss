@@ -18,7 +18,7 @@
 
   &__content {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(31rem, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(max(22%, 25rem), 1fr));
     justify-items: center;
     gap: 5rem;
   }
