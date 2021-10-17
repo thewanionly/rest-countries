@@ -15,7 +15,7 @@
   color: var(--text-color-primary);
   padding: 0.75rem 2rem;
   border-radius: 0.4rem;
-  box-shadow: rgba(99, 99, 99, 0.5) 0px 2px 8px 0px;
+  box-shadow: $box-shadow;
   border: none;
   cursor: pointer;
   transition: all 0.2s;
@@ -30,7 +30,7 @@
   }
 
   &:hover {
-    box-shadow: rgba(99, 99, 99, 0.8) 0px 2px 8px 0px;
+    box-shadow: $box-shadow-hover;
   }
 
   &.transparent {
@@ -53,14 +53,14 @@
   width: 25rem;
   background-color: var(--bg-color-secondary);
   color: var(--text-color-primary);
-  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  box-shadow: $box-shadow;
   border-radius: 0.4rem;
   cursor: pointer;
   transition: all 0.2s;
 
   &:hover {
     transform: translateY(-0.5rem);
-    box-shadow: rgba(99, 99, 99, 0.5) 0px 2px 8px 0px;
+    box-shadow: $box-shadow-hover;
   }
 
   &__flag {
@@ -107,14 +107,14 @@
   color: var(--text-color-secondary);
   padding: 1.5rem 2.5rem;
   border-radius: 0.4rem;
-  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  box-shadow: $box-shadow;
   transition: all 0.2s;
 
   display: flex;
   gap: 2rem;
 
   &:hover {
-    box-shadow: rgba(99, 99, 99, 0.5) 0px 2px 8px 0px;
+    box-shadow: $box-shadow-hover;
   }
 
   .icon {
@@ -155,11 +155,11 @@
     background-color: var(--bg-color-secondary);
     padding: 1.5rem;
     border-radius: 0.4rem;
-    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    box-shadow: $box-shadow;
     transition: all 0.2s;
 
     &:hover {
-      box-shadow: rgba(99, 99, 99, 0.5) 0px 2px 8px 0px;
+      box-shadow: $box-shadow-hover;
     }
 
     &__arrow-icon {
@@ -177,7 +177,7 @@
     background-color: var(--bg-color-secondary);
     padding: 1.5rem;
     border-radius: 0.4rem;
-    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    box-shadow: $box-shadow;
     transition: all 0.2s;
 
     &.hide {
@@ -185,7 +185,7 @@
     }
 
     &:hover {
-      box-shadow: rgba(99, 99, 99, 0.5) 0px 2px 8px 0px;
+      box-shadow: $box-shadow-hover;
     }
 
     &__item {
@@ -193,7 +193,7 @@
 
       &.break {
         margin-top: 0.2rem;
-        border-top: 0.1rem solid rgba(99, 99, 99, 0.5);
+        border-top: 0.1rem solid var(--border-color);
         padding-top: 1rem;
       }
 

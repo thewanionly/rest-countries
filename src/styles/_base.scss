@@ -6,8 +6,14 @@ $color-blue-light: hsl(209, 23%, 40%);
 $color-blue-lighter: hsl(200, 20%, 70%);
 $color-blue-lightest: hsl(200, 20%, 85%);
 $color-gray-dark: hsl(0, 0%, 52%); //Dark Gray (Light Mode Input)
+$color-gray-dark-fade: hsla(0, 0%, 52%, 0.5);
+$color-gray-dark-fader: hsla(0, 0%, 52%, 0.2);
 $color-gray-light: hsl(0, 0%, 98%); //Very Light Gray (Light Mode Background)
 $color-white: hsl(0, 0%, 100%); //White (Dark Mode Text & Light Mode Elements)
+
+// Box shadows
+$box-shadow: var(--box-shadow-color) 0px 2px 8px 0px;
+$box-shadow-hover: var(--box-shadow-color-hover) 0px 2px 8px 0px;
 
 // Typography
 $font-primary: 'Nunito', sans-serif;
@@ -27,6 +33,9 @@ $bp-mobile: 23.4375em; // 375px / 16 = 23.4375em
   --text-color-primary: #{$color-blue-darkest};
   --text-color-primary-hover: #{$color-blue-light};
   --text-color-secondary: #{$color-gray-dark};
+  --box-shadow-color: #{$color-gray-dark-fader};
+  --box-shadow-color-hover: #{$color-gray-dark-fade};
+  --border-color: #{$color-gray-dark-fade};
 }
 
 *,

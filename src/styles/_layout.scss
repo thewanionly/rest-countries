@@ -3,7 +3,7 @@
   padding: 2rem 5rem;
   background-color: var(--bg-color-secondary);
   color: var(--text-color-primary);
-  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  box-shadow: $box-shadow;
 
   display: flex;
   justify-content: space-between;
