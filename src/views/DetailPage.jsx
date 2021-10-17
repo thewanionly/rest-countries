@@ -83,39 +83,42 @@ const CountryDetail = ({ data = {}, allCountries, handleShowDetailPage, loading 
         <img className='country-detail__flag__img' src={flag} alt={name} />
       </div>
       <div className='country-detail__details'>
-        <div className={`country-detail__details__name${bigTextLoadingClassName}`}>
+        <div className={`country-detail__details__main${bigTextLoadingClassName}`}>
           <h1>{name}</h1>
         </div>
-        <div className='country-detail__details__left'>
-          {Object.entries({
-            nativeName,
-            population: formatNumber(population),
-            region,
-            subregion,
-            capital
-          }).map(([label, value], index) => (
-            <CountryDetailRow
-              key={label + value + index}
-              label={formatLabel(label)}
-              value={value}
-              loading={loading}
-            />
-          ))}
+        <div className='country-detail__details__sub'>
+          <div className='country-detail__details__sub__left'>
+            {Object.entries({
+              nativeName,
+              population: formatNumber(population),
+              region,
+              subregion,
+              capital
+            }).map(([label, value], index) => (
+              <CountryDetailRow
+                key={label + value + index}
+                label={formatLabel(label)}
+                value={value}
+                loading={loading}
+              />
+            ))}
+          </div>
+          <div className='country-detail__details__sub__right'>
+            {Object.entries({
+              topLevelDomain: topLevelDomain?.join(', ') || '',
+              currencies: currencies?.map(({ name }) => name).join(', ') || '',
+              languages: languages?.map(({ name }) => name).join(', ') || ''
+            }).map(([label, value], index) => (
+              <CountryDetailRow
+                key={label + value + index}
+                label={formatLabel(label)}
+                value={value}
+                loading={loading}
+              />
+            ))}
+          </div>
         </div>
-        <div className='country-detail__details__right'>
-          {Object.entries({
-            topLevelDomain: topLevelDomain?.join(', ') || '',
-            currencies: currencies?.map(({ name }) => name).join(', ') || '',
-            languages: languages?.map(({ name }) => name).join(', ') || ''
-          }).map(([label, value], index) => (
-            <CountryDetailRow
-              key={label + value + index}
-              label={formatLabel(label)}
-              value={value}
-              loading={loading}
-            />
-          ))}
-        </div>
+
         <div className='country-detail__details__border-countries'>
           <strong>Border Countries:</strong>
           {loading ? (

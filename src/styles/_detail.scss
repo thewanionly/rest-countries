@@ -1,12 +1,8 @@
 .detail {
+  padding: 0 2rem;
   &__header {
     margin-top: 3rem;
     margin-bottom: 5rem;
-  }
-
-  &__content {
-    display: flex;
-    justify-content: space-between;
   }
 }
 
@@ -14,17 +10,15 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 10rem;
+  gap: 5rem;
   flex-wrap: wrap;
   color: var(--text-color-primary);
-
-  height: 50rem;
   width: 100%;
 
   &__flag {
     height: 40rem;
     width: 65rem;
-    min-width: 45rem;
+    flex-grow: 1;
 
     &__img {
       width: 100%;
@@ -35,37 +29,32 @@
   }
 
   &__details {
-    display: grid;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    flex-grow: 1;
 
-    grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
-    grid-template-rows: repeat(3, min-content);
-    grid-template-areas:
-      'name name'
-      'left right'
-      'footer footer';
-    justify-content: space-between;
-    column-gap: 5rem;
-    row-gap: 2rem;
-
-    width: 40%;
-
-    &__name {
-      grid-area: name;
+    &__main {
       margin-bottom: 2rem;
     }
 
-    &__left {
-      grid-area: left;
-    }
+    &__sub {
+      display: flex;
+      column-gap: 10rem;
+      row-gap: 3rem;
+      flex-wrap: wrap;
 
-    &__right {
-      grid-area: right;
+      &__left {
+        flex-grow: 1;
+      }
+
+      &__right {
+        flex-grow: 1;
+      }
     }
 
     &__border-countries {
       padding: 1rem 0;
-      grid-area: footer;
-      align-items: flex-start;
       display: flex;
       flex-wrap: wrap;
       align-items: center;
