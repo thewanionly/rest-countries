@@ -67,7 +67,7 @@ const App = () => {
           label='Dark Mode'
           icon={{
             name: 'dark_mode',
-            type: 'outlined'
+            type: !isDarkMode ? 'outlined' : ''
           }}
           isTransparent
           onClick={handleSetColorMode}
