@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 
-import { API_ENDPOINT, PAGE_LIMIT } from 'utilities/config'
+import { API_ENDPOINT, FIELDS_STRING, PAGE_LIMIT } from 'utilities/config'
 import { useLoadData, useDarkMode } from 'utilities/hooks'
 
 import Button from 'components/Button'
@@ -9,7 +9,7 @@ import HomePage from 'views/HomePage.jsx'
 import DetailPage from 'views/DetailPage.jsx'
 
 const App = () => {
-  const [countries, isLoading, error] = useLoadData(`${API_ENDPOINT}/all`)
+  const [countries, isLoading, error] = useLoadData(`${API_ENDPOINT}/all?fields=${FIELDS_STRING}`)
   const [isDarkMode, toggleDarkMode] = useDarkMode()
   const [regions, setRegions] = useState()
   const [searchTerm, setSearchTerm] = useState('')
