@@ -9,14 +9,27 @@
   justify-content: space-between;
   align-items: center;
 
-  @media only screen and (max-width: $bp-mobile) {
-    font-size: 1rem;
+  @media only screen and (max-width: $bp-mobile-larger) {
+    font-size: 0.9rem;
     padding: 1.5rem 2.5rem;
   }
 
+  @media only screen and (max-width: $bp-mobile) {
+    font-size: 0.9rem;
+    padding: 1.3rem 2.3rem;
+  }
+
   .dark-mode-btn {
+    @media only screen and (max-width: $bp-mobile-larger) {
+      font-size: 1.4rem;
+
+      i {
+        font-size: 1.6rem;
+      }
+    }
+
     @media only screen and (max-width: $bp-mobile) {
-      font-size: 1.75rem;
+      font-size: 1.6rem;
 
       i {
         font-size: 1.75rem;

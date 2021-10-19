@@ -22,6 +22,8 @@ $font-size-2: 1.6rem;
 
 // Breakpoints
 $bp-desktop: 90em; // 1440px / 16 = 90em
+$bp-desktop-smaller: 67.5em; // 1080px / 16 = 62.5em
+$bp-mobile-larger: 37.5em; // 600px / 16 = 37.5em
 $bp-mobile: 23.4375em; // 375px / 16 = 23.4375em
 
 // light mode (default)

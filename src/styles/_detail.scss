@@ -1,29 +1,36 @@
 .detail {
   padding: 0 2rem;
+
   &__header {
     margin-top: 3rem;
-    margin-bottom: 5rem;
+    margin-bottom: 6rem;
   }
 }
 
 .country-detail {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 5rem;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 41.62rem), 1fr));
+  place-items: center;
+  column-gap: 10rem;
+  row-gap: 4rem;
   color: var(--text-color-primary);
   width: 100%;
 
   &__flag {
-    height: 40rem;
-    width: 65rem;
-    flex-grow: 1;
+    max-height: 100%;
+    max-width: 100%;
+    min-width: 35rem;
+    min-height: 24rem;
+
+    @media only screen and (max-width: $bp-desktop-smaller) {
+      max-width: 60%;
+    }
 
     &__img {
-      width: 100%;
-      height: 100%;
+      max-height: 100%;
+      max-width: 100%;
       min-width: 100%;
+      min-height: 100%;
       object-fit: contain;
     }
   }
@@ -33,6 +40,7 @@
     flex-direction: column;
     gap: 2rem;
     flex-grow: 1;
+    width: 100%;
 
     &__main {
       margin-bottom: 2rem;
@@ -40,8 +48,8 @@
 
     &__sub {
       display: flex;
-      column-gap: 10rem;
-      row-gap: 3rem;
+      column-gap: 5rem;
+      row-gap: 4rem;
       flex-wrap: wrap;
 
       &__left {
