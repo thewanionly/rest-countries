@@ -1,11 +1,12 @@
 import { useState, useEffect, useRef } from 'react'
+import PropTypes from 'prop-types'
 
 import Icon from 'components/Icon'
 
 const FilterDropdown = ({
-  options,
   value,
   placeholder = 'Filter',
+  options,
   onChange: handleSetFilterValue
 }) => {
   const [isOptionsOpen, setIsOptionsOpen] = useState(false)
@@ -58,6 +59,13 @@ const FilterDropdown = ({
       </div>
     </div>
   )
+}
+
+FilterDropdown.propTypes = {
+  value: PropTypes.string,
+  placeholder: PropTypes.string,
+  options: PropTypes.array,
+  onChange: PropTypes.func
 }
 
 export default FilterDropdown
