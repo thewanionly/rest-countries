@@ -51,7 +51,7 @@ const App = () => {
           label='Dark Mode'
           icon={{
             name: 'dark_mode',
-            type: !isDarkMode ? 'outlined' : ''
+            ...(!isDarkMode && { type: 'outlined' })
           }}
           isTransparent
           onClick={toggleDarkMode}
