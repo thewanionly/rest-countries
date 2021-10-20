@@ -28,8 +28,6 @@ const App = () => {
 
   // log only if countries changed
   useEffect(() => {
-    console.log('App countries', countries)
-
     if (countries) {
       // Set regions
       const allRegions = countries.reduce((regions, country) => {
@@ -43,16 +41,6 @@ const App = () => {
       setRegions([...allRegions, 'Show all'])
     }
   }, [countries])
-
-  // log only if regions changed
-  useEffect(() => {
-    console.log('App regions', regions)
-  }, [regions])
-
-  // log only if filteredCountries changed
-  useEffect(() => {
-    console.log('App filteredCountries', filteredCountries)
-  }, [filteredCountries])
 
   return (
     <div className={`app${isDarkMode ? ' dark-mode' : ''}`}>

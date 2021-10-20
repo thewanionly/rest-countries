@@ -24,8 +24,6 @@ const DetailPage = () => {
     navigate(`/${country.toLowerCase()}`)
   }
 
-  console.log('Country detail', countryDetail)
-
   return (
     <div className='detail'>
       <div className='detail__header'>
