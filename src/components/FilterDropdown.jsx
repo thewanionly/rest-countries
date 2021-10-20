@@ -1,5 +1,7 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState } from 'react'
 import PropTypes from 'prop-types'
+
+import { useClickOutside } from 'utilities/hooks'
 
 import Icon from 'components/Icon'
 
@@ -10,31 +12,22 @@ const FilterDropdown = ({
   onChange: handleSetFilterValue
 }) => {
   const [isOptionsOpen, setIsOptionsOpen] = useState(false)
-  const dropdownRef = useRef()
 
   const handleToggleOptions = () => {
     setIsOptionsOpen(prevValue => !prevValue)
   }
 
-  const handleSelectOption = value => {
-    handleSetFilterValue(value)
+  const handleCloseOptions = () => {
     setIsOptionsOpen(false)
   }
 
+  const handleSelectOption = value => {
+    handleSetFilterValue(value)
+    handleCloseOptions()
+  }
+
   // Close dropdown options when user clicked outside
-  useEffect(() => {
-    const handleClick = e => {
-      if (dropdownRef?.current && !dropdownRef.current.contains(e.target)) {
-        setIsOptionsOpen(false)
-      }
-    }
-
-    window.addEventListener('click', handleClick)
-
-    return () => {
-      window.removeEventListener('click', handleClick)
-    }
-  }, [dropdownRef, setIsOptionsOpen])
+  const dropdownRef = useClickOutside(handleCloseOptions)
 
   return (
     <div className='filter-dropdown' ref={dropdownRef}>
