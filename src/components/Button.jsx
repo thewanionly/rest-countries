@@ -3,13 +3,11 @@ import PropTypes from 'prop-types'
 import Icon from 'components/Icon'
 
 const Button = ({ className = '', label, icon, isTransparent, onClick }) => {
+  const buttonClassName = `button ${className} ${isTransparent ? 'transparent' : ''}`
   const iconProps = typeof icon === 'object' ? { ...icon } : { name: icon }
 
   return (
-    <button
-      className={`button ${className} ${isTransparent ? 'transparent' : ''}`}
-      onClick={onClick}
-    >
+    <button className={buttonClassName} onClick={onClick}>
       {icon && <Icon {...iconProps} />}
       {label}
     </button>
