@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types'
 import { useNavigate } from 'react-router-dom'
 
 import { titleCase, formatNumber } from 'utilities/helpers'
@@ -38,6 +39,11 @@ const CountriesCard = ({ data = {}, loading }) => {
       </div>
     </div>
   )
+}
+
+CountriesCard.propTypes = {
+  data: PropTypes.object,
+  loading: PropTypes.bool
 }
 
 export default CountriesCard
