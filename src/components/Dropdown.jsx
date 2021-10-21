@@ -36,11 +36,11 @@ const Dropdown = ({ value, placeholder = 'Filter', options, onChange: handleSetF
       <div className={`filter-dropdown__options${!isOptionsOpen ? ' hide' : ''}`}>
         {options?.map(({ label, value }) => (
           <div
-            className={`filter-dropdown__options__item${label === 'Show all' ? ' break' : ''}`}
+            className={`filter-dropdown__options__item${!value ? ' break' : ''}`}
             key={label}
             onClick={() => handleSelectOption(value)}
           >
-            {label === 'Show all' ? <em>{label}</em> : label}
+            {!value ? <em>{label}</em> : label}
           </div>
         ))}
       </div>
