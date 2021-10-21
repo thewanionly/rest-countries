@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 
 import { PAGE_LIMIT } from 'utilities/config'
-import { useDarkMode, useData } from 'utilities/hooks'
+import { useDarkMode, useData, useFilterData } from 'utilities/hooks'
 
 import Button from 'components/Button'
 
@@ -10,13 +10,17 @@ import HomePage from 'views/HomePage.jsx'
 import DetailPage from 'views/DetailPage.jsx'
 
 const App = () => {
-  const [searchTerm, setSearchTerm] = useState('')
-  const [filterTerm, setFilterTerm] = useState('')
-  const [countries, isLoading, error] = useData('countries')
-  const [regions, isLoadingRegions, errorRegions] = useData('regions')
   const [isDarkMode, toggleDarkMode] = useDarkMode()
   const [limit, setLimit] = useState(PAGE_LIMIT)
+  const [countries, isLoading, error] = useData('countries')
+  const [regions, isLoadingRegions, errorRegions] = useData('regions')
+  const [filteredCountries, filters, setFilters] = useFilterData(countries, {
+    searchField: 'name',
+    filterField: 'region'
+  })
 
+  const { searchTerm, filterTerm } = filters
+  const { setSearchTerm, setFilterTerm } = setFilters
   const darkModeBtnIconProps = { name: 'dark_mode', ...(!isDarkMode && { type: 'outlined' }) }
 
   const handleShowMore = () => {
@@ -42,7 +46,7 @@ const App = () => {
               path='/'
               element={
                 <HomePage
-                  data={countries}
+                  data={filteredCountries}
                   error={error || errorRegions}
                   loading={isLoading || isLoadingRegions}
                   searchTerm={searchTerm}
