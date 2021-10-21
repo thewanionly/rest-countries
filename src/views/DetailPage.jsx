@@ -4,7 +4,7 @@ import { API_ENDPOINT, FIELDS_STRING } from 'utilities/config'
 import { useLoadData } from 'utilities/hooks'
 import { camelCaseToStandardFormat, formatNumber } from 'utilities/helpers'
 
-import Button from 'components/Button'
+import { Button } from 'components'
 
 const DUMMY_BUTTONS = [...new Array(3)]
 

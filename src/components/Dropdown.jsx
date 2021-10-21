@@ -5,12 +5,7 @@ import { useClickOutside } from 'utilities/hooks'
 
 import Icon from 'components/Icon'
 
-const FilterDropdown = ({
-  value,
-  placeholder = 'Filter',
-  options,
-  onChange: handleSetFilterValue
-}) => {
+const Dropdown = ({ value, placeholder = 'Filter', options, onChange: handleSetFilterValue }) => {
   const [isOptionsOpen, setIsOptionsOpen] = useState(false)
 
   const handleToggleOptions = () => {
@@ -54,11 +49,11 @@ const FilterDropdown = ({
   )
 }
 
-FilterDropdown.propTypes = {
+Dropdown.propTypes = {
   value: PropTypes.string,
   placeholder: PropTypes.string,
   options: PropTypes.array,
   onChange: PropTypes.func
 }
 
-export default FilterDropdown
+export default Dropdown

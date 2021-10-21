@@ -1,9 +1,6 @@
 import { PAGE_LIMIT } from 'utilities/config'
 
-import CountriesCard from 'components/CountriesCard'
-import SearchBar from 'components/SearchBar'
-import FilterDropdown from 'components/FilterDropdown'
-import Button from 'components/Button'
+import { Button, CountriesCard, SearchBar, Dropdown } from 'components/index'
 
 const DUMMY_LIST = [...new Array(PAGE_LIMIT)]
 
@@ -27,7 +24,7 @@ const HomePage = ({
           placeholder='Search for a country...'
           onChange={setSearchTerm}
         />
-        <FilterDropdown
+        <Dropdown
           value={filterTerm}
           placeholder='Filter by Region'
           onChange={setFilterTerm}
