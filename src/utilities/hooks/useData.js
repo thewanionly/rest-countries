@@ -20,7 +20,17 @@ const postProcessData = (data, resource) => {
   let postProcessedData = data
 
   if (resource === 'regions') {
-    postProcessedData = [...new Set(data.map(d => d.region)), 'Show all']
+    postProcessedData = [...new Set(data.map(d => d.region))].map(d => ({
+      label: d,
+      value: d
+    }))
+    postProcessedData = [
+      ...postProcessedData,
+      {
+        label: 'Show all',
+        value: ''
+      }
+    ]
   }
 
   return postProcessedData
