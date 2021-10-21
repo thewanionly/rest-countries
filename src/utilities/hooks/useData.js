@@ -1,14 +1,16 @@
 import { API_ENDPOINT, FIELDS_STRING } from 'utilities/config'
 import { useLoadData } from 'utilities/hooks'
 
+// Resource endpoints
+const RESOURCE_ENDPOINTS = {
+  countries: `${API_ENDPOINT}/all?fields=${FIELDS_STRING}`,
+  country_detail: `${API_ENDPOINT}/alpha/`,
+  regions: `${API_ENDPOINT}/all?fields=region`
+}
+
 // Gets resource endpoints given the resource and id
 const getResourceEndpoints = (resource, id) => {
-  const resourceEndpoints = {
-    countries: `${API_ENDPOINT}/all?fields=${FIELDS_STRING}`,
-    country_detail: `${API_ENDPOINT}/alpha/`,
-    regions: `${API_ENDPOINT}/all?fields=region`
-  }
-  const endpoint = resourceEndpoints[resource]
+  const endpoint = RESOURCE_ENDPOINTS[resource]
 
   return endpoint && id ? `${endpoint}${id}` : endpoint
 }
@@ -29,9 +31,9 @@ const postProcessData = (data, resource) => {
  * Also handles post processing of data.
  */
 const useData = (resource, id) => {
-  const resourceEndpint = getResourceEndpoints(resource, id)
+  const resourceEndpoint = getResourceEndpoints(resource, id)
 
-  const [data, isLoading, error] = useLoadData(resourceEndpint)
+  const [data, isLoading, error] = useLoadData(resourceEndpoint)
 
   const finalData = data && resource && postProcessData(data, resource)
 
