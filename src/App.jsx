@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 
 import { PAGE_LIMIT } from 'utilities/config'
-import { useCountriesData, useDarkMode } from 'utilities/hooks'
+import { useDarkMode, useData } from 'utilities/hooks'
 
 import Button from 'components/Button'
 
@@ -12,11 +12,11 @@ import DetailPage from 'views/DetailPage.jsx'
 const App = () => {
   const [searchTerm, setSearchTerm] = useState('')
   const [filterTerm, setFilterTerm] = useState('')
-  const [data, isLoading, error] = useCountriesData(searchTerm, filterTerm, true)
+  const [countries, isLoading, error] = useData('countries')
+  const [regions, isLoadingRegions, errorRegions] = useData('regions')
   const [isDarkMode, toggleDarkMode] = useDarkMode()
   const [limit, setLimit] = useState(PAGE_LIMIT)
 
-  const { countries, regions } = data
   const darkModeBtnIconProps = { name: 'dark_mode', ...(!isDarkMode && { type: 'outlined' }) }
 
   const handleShowMore = () => {
@@ -43,8 +43,8 @@ const App = () => {
               element={
                 <HomePage
                   data={countries}
-                  error={error}
-                  loading={isLoading}
+                  error={error || errorRegions}
+                  loading={isLoading || isLoadingRegions}
                   searchTerm={searchTerm}
                   setSearchTerm={setSearchTerm}
                   regions={regions}
