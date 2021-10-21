@@ -12,9 +12,12 @@ import DetailPage from 'views/DetailPage.jsx'
 const App = () => {
   const [searchTerm, setSearchTerm] = useState('')
   const [filterTerm, setFilterTerm] = useState('')
-  const [countries, regions, isLoading, error] = useCountriesData(searchTerm, filterTerm)
+  const [data, isLoading, error] = useCountriesData(searchTerm, filterTerm, true)
   const [isDarkMode, toggleDarkMode] = useDarkMode()
   const [limit, setLimit] = useState(PAGE_LIMIT)
+
+  const { countries, regions } = data
+  const darkModeBtnIconProps = { name: 'dark_mode', ...(!isDarkMode && { type: 'outlined' }) }
 
   const handleShowMore = () => {
     setLimit(prevValue => prevValue + PAGE_LIMIT)
@@ -27,10 +30,7 @@ const App = () => {
         <Button
           className='dark-mode-btn'
           label='Dark Mode'
-          icon={{
-            name: 'dark_mode',
-            ...(!isDarkMode && { type: 'outlined' })
-          }}
+          icon={darkModeBtnIconProps}
           isTransparent
           onClick={toggleDarkMode}
         />
