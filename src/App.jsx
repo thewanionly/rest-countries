@@ -1,46 +1,24 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 
-import { API_ENDPOINT, FIELDS_STRING, PAGE_LIMIT } from 'utilities/config'
-import { useLoadData, useDarkMode } from 'utilities/hooks'
+import { PAGE_LIMIT } from 'utilities/config'
+import { useCountriesData, useDarkMode } from 'utilities/hooks'
 
 import Button from 'components/Button'
+
 import HomePage from 'views/HomePage.jsx'
 import DetailPage from 'views/DetailPage.jsx'
 
 const App = () => {
-  const [countries, isLoading, error] = useLoadData(`${API_ENDPOINT}/all?fields=${FIELDS_STRING}`)
-  const [isDarkMode, toggleDarkMode] = useDarkMode()
-  const [regions, setRegions] = useState()
   const [searchTerm, setSearchTerm] = useState('')
   const [filterTerm, setFilterTerm] = useState('')
+  const [countries, regions, isLoading, error] = useCountriesData(searchTerm, filterTerm)
+  const [isDarkMode, toggleDarkMode] = useDarkMode()
   const [limit, setLimit] = useState(PAGE_LIMIT)
-
-  const filteredCountries = countries?.filter(
-    ({ name, region }) =>
-      name.toLowerCase().includes(searchTerm.toLocaleLowerCase()) &&
-      (!filterTerm || filterTerm === 'Show all' || region === filterTerm)
-  )
 
   const handleShowMore = () => {
     setLimit(prevValue => prevValue + PAGE_LIMIT)
   }
-
-  // log only if countries changed
-  useEffect(() => {
-    if (countries) {
-      // Set regions
-      const allRegions = countries.reduce((regions, country) => {
-        if (!regions?.includes(country.region)) {
-          return [...regions, country.region]
-        } else {
-          return regions
-        }
-      }, [])
-
-      setRegions([...allRegions, 'Show all'])
-    }
-  }, [countries])
 
   return (
     <div className={`app${isDarkMode ? ' dark-mode' : ''}`}>
@@ -64,7 +42,7 @@ const App = () => {
               path='/'
               element={
                 <HomePage
-                  filteredCountries={filteredCountries}
+                  data={countries}
                   error={error}
                   loading={isLoading}
                   searchTerm={searchTerm}

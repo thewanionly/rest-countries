@@ -5,7 +5,7 @@ import { Button, CountriesCard, SearchBar, Dropdown } from 'components/index'
 const DUMMY_LIST = [...new Array(PAGE_LIMIT)]
 
 const HomePage = ({
-  filteredCountries,
+  data,
   error,
   loading,
   searchTerm,
@@ -37,14 +37,14 @@ const HomePage = ({
         ) : error ? (
           <h1>{`There's an error: ${error}`}</h1>
         ) : (
-          filteredCountries &&
-          filteredCountries
+          data &&
+          data
             .slice(0, limit)
             .map(country => <CountriesCard key={country.alpha2Code} data={country} />)
         )}
       </div>
       <div className='home__footer'>
-        {limit < filteredCountries?.length && <Button label='Show more' onClick={handleShowMore} />}
+        {limit < data?.length && <Button label='Show more' onClick={handleShowMore} />}
       </div>
     </div>
   )
