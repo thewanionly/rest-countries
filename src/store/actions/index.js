@@ -10,7 +10,8 @@ import {
   FETCH_REGIONS_ERROR,
   FETCH_COUNTRY_DETAIL_LOADING,
   FETCH_COUNTRY_DETAIL_SUCCESS,
-  FETCH_COUNTRY_DETAIL_ERROR
+  FETCH_COUNTRY_DETAIL_ERROR,
+  SET_DARK_MODE
 } from './types'
 
 /******************* HELPER FUNCTIONS ***********************/
@@ -38,6 +39,9 @@ const getActionType = resource => {
 }
 
 /*********************  ACTION CREATORS **************************/
+/**
+ * Fetching the data based on action
+ */
 const fetchData =
   (resource, url, cacheResults = true) =>
   async dispatch => {
@@ -70,4 +74,12 @@ const fetchData =
     }
   }
 
-export { fetchData }
+/**
+ * Setting darkMode
+ */
+const setDarkMode = value => ({
+  type: SET_DARK_MODE,
+  payload: value
+})
+
+export { fetchData, setDarkMode }
