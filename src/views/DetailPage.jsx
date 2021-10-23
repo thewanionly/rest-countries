@@ -31,7 +31,7 @@ const DetailPage = () => {
         {isLoading || isLoadingCountries ? (
           <CountryDetail loading />
         ) : error || errorCountries ? (
-          <h1>{`There's an error: ${error || errorCountries}`}</h1>
+          <h3 className='error-message'>{`There's an error: ${error || errorCountries}`}</h3>
         ) : (
           countryDetail &&
           countries && (

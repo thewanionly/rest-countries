@@ -47,12 +47,13 @@ const HomePage = () => {
         {loading ? (
           DUMMY_LIST.map((item, index) => <CountriesCard key={index} data={item} loading />)
         ) : error ? (
-          <h1>{`There's an error: ${error}`}</h1>
-        ) : (
-          data &&
+          <h3 className='error-message'>{`There's an error: ${error}`}</h3>
+        ) : data && data.length > 0 ? (
           data
             .slice(0, limit)
             .map(country => <CountriesCard key={country.alpha2Code} data={country} />)
+        ) : (
+          <h3 className='no-results-message'>No results found</h3>
         )}
       </div>
       <div className='home__footer'>
