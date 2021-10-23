@@ -10,23 +10,24 @@ const INITIAL_STATE = {
   error: false
 }
 
-// Post process the results given the resource
-const postProcessData = (data, resource) => {
+// Post process the raw regions data
+const postProcessRegions = data => {
   let postProcessedData = data
 
-  if (resource === 'regions') {
-    postProcessedData = [...new Set(data.map(d => d.region))].map(d => ({
-      label: d,
-      value: d
-    }))
-    postProcessedData = [
-      ...postProcessedData,
-      {
-        label: 'Show all',
-        value: ''
-      }
-    ]
-  }
+  //Remove duplicates. Map each item to an object with `label` and `value` keys
+  postProcessedData = [...new Set(data.map(d => d.region))].map(d => ({
+    label: d,
+    value: d
+  }))
+
+  // Add one item to the data
+  postProcessedData = [
+    ...postProcessedData,
+    {
+      label: 'Show all',
+      value: ''
+    }
+  ]
 
   return postProcessedData
 }
@@ -46,7 +47,7 @@ const regions = (state = INITIAL_STATE, action) => {
       break
     case FETCH_REGIONS_SUCCESS:
       newState = {
-        data: postProcessData(payload, 'regions'),
+        data: postProcessRegions(payload),
         isLoading: false,
         error: false
       }
