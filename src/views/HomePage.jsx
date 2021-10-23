@@ -1,14 +1,16 @@
-import { useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 
 import { PAGE_LIMIT, RESOURCE_COUNTRIES, RESOURCE_REGIONS } from 'utilities/config'
 import { useFetchData, useFilterData } from 'utilities/hooks'
+import { setLimit } from 'store/actions'
 
 import { Button, CountriesCard, SearchBar, Dropdown } from 'components/index'
 
 const DUMMY_LIST = [...new Array(PAGE_LIMIT)]
 
 const HomePage = () => {
-  const [limit, setLimit] = useState(PAGE_LIMIT)
+  const dispatch = useDispatch()
+  const limit = useSelector(({ countries: { limit } = {} }) => limit)
 
   const [countries, isLoadingCountries, errorCountries] = useFetchData(RESOURCE_COUNTRIES)
   const [regions, isLoadingRegions, errorRegions] = useFetchData(RESOURCE_REGIONS)
@@ -25,7 +27,7 @@ const HomePage = () => {
   const data = filteredCountries
 
   const handleShowMore = () => {
-    setLimit(prevValue => prevValue + PAGE_LIMIT)
+    dispatch(setLimit(limit + PAGE_LIMIT))
   }
 
   return (

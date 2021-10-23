@@ -11,7 +11,10 @@ import {
   FETCH_COUNTRY_DETAIL_LOADING,
   FETCH_COUNTRY_DETAIL_SUCCESS,
   FETCH_COUNTRY_DETAIL_ERROR,
-  SET_DARK_MODE
+  SET_DARK_MODE,
+  SET_SEARCH_TERM,
+  SET_FILTER_TERM,
+  SET_LIMIT
 } from './types'
 
 /******************* HELPER FUNCTIONS ***********************/
@@ -82,4 +85,28 @@ const setDarkMode = value => ({
   payload: value
 })
 
-export { fetchData, setDarkMode }
+/**
+ * Setting searchTerm
+ */
+const setSearchTerm = value => ({
+  type: SET_SEARCH_TERM,
+  payload: value
+})
+
+/**
+ * Setting filterTerm
+ */
+const setFilterTerm = value => ({
+  type: SET_FILTER_TERM,
+  payload: value
+})
+
+/**
+ * Setting limit
+ */
+const setLimit = value => ({
+  type: SET_LIMIT,
+  payload: value
+})
+
+export { fetchData, setDarkMode, setSearchTerm, setFilterTerm, setLimit }
