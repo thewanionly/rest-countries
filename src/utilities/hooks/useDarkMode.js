@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
 import { setDarkMode } from 'store/actions'
@@ -12,19 +13,10 @@ import { setDarkMode } from 'store/actions'
  * ]
  */
 const useDarkMode = () => {
-  // 1. Get data from localStorage
-  let isDarkModeInLocalStorage = localStorage.getItem('darkMode')
-  isDarkModeInLocalStorage = isDarkModeInLocalStorage && JSON.parse(isDarkModeInLocalStorage) // Parse data from localStorage to JS object
+  // Declare darkMode state
+  const darkMode = useSelector(({ darkMode }) => darkMode)
 
-  // 2. Get data from browser theme
-  const isDarkModeInBrowser = window.matchMedia('(prefers-color-scheme: dark)').matches
-
-  // 3. Declare darkMode state (default value from localStorage -> browser -> false)
-  const defaultValue = isDarkModeInLocalStorage ?? isDarkModeInBrowser ?? false
-  const darkModeState = useSelector(({ darkMode }) => darkMode)
-  const darkMode = darkModeState ?? defaultValue
-
-  // 4. Dark mode flag toggle handler
+  // Dark mode flag toggle handler
   const dispatch = useDispatch()
 
   const handleToggleDarkMode = () => {
@@ -36,6 +28,21 @@ const useDarkMode = () => {
     // Store new darkMode value to localStorage
     localStorage.setItem('darkMode', JSON.stringify(newValue))
   }
+
+  //Set default value during first mount
+  useEffect(() => {
+    //  Get data from localStorage
+    let isDarkModeInLocalStorage = localStorage.getItem('darkMode')
+    isDarkModeInLocalStorage = isDarkModeInLocalStorage && JSON.parse(isDarkModeInLocalStorage) // Parse data from localStorage to JS object
+
+    // Get data from browser theme
+    const isDarkModeInBrowser = window.matchMedia('(prefers-color-scheme: dark)').matches
+
+    // (default value from localStorage -> browser -> false)
+    const defaultValue = isDarkModeInLocalStorage ?? isDarkModeInBrowser ?? false
+
+    dispatch(setDarkMode(defaultValue))
+  }, [dispatch])
 
   return [darkMode, handleToggleDarkMode]
 }
