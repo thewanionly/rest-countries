@@ -1,8 +1,10 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
 
 import { PAGE_LIMIT } from 'utilities/config'
 import { useDarkMode, useData, useFilterData } from 'utilities/hooks'
+import { fetchData } from 'store/actions'
 
 import Button from 'components/Button'
 
@@ -12,8 +14,19 @@ import DetailPage from 'views/DetailPage.jsx'
 const App = () => {
   const [isDarkMode, toggleDarkMode] = useDarkMode()
   const [limit, setLimit] = useState(PAGE_LIMIT)
-  const [countries, isLoading, error] = useData('countries')
-  const [regions, isLoadingRegions, errorRegions] = useData('regions')
+  const [countries, isLoading, error] = useSelector(
+    ({ countries: { data, isLoading, error } = {} }) => [data, isLoading, error]
+  )
+  const [regions, isLoadingRegions, errorRegions] = useSelector(
+    ({ regions: { data, isLoading, error } = {} }) => [data, isLoading, error]
+  )
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(fetchData('countries'))
+    dispatch(fetchData('regions'))
+  }, [dispatch])
+
   const [filteredCountries, filters, setFilters] = useFilterData(countries, {
     searchField: 'name',
     filterField: 'region'

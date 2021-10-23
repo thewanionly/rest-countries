@@ -1,7 +1,10 @@
+import { useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
 
 import { useData } from 'utilities/hooks'
 import { camelCaseToStandardFormat, formatNumber } from 'utilities/helpers'
+import { fetchData } from 'store/actions'
 
 import { Button } from 'components'
 
@@ -10,8 +13,18 @@ const DUMMY_BUTTONS = [...new Array(3)]
 const DetailPage = () => {
   const navigate = useNavigate()
   const { id } = useParams()
-  const [countries, isLoadingCountries, errorCountries] = useData('countries')
-  const [countryDetail, isLoading, error] = useData('country_detail', id)
+  const [countries, isLoadingCountries, errorCountries] = useSelector(
+    ({ countries: { data, isLoading, error } = {} }) => [data, isLoading, error]
+  )
+  const [countryDetail, isLoading, error] = useSelector(
+    ({ countryDetail: { data, isLoading, error } = {} }) => [data, isLoading, error]
+  )
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(fetchData('countries'))
+    dispatch(fetchData('country_detail', id))
+  }, [dispatch, id])
 
   const handleBackClick = () => {
     navigate('/')
