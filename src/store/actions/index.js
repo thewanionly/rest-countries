@@ -52,23 +52,39 @@ const getActionType = resource => {
 }
 
 /*********************  ACTION CREATORS **************************/
-const fetchData = (resource, id) => async dispatch => {
-  // Get action types
-  const { LOADING_TYPE, SUCCESS_TYPE, ERROR_TYPE } = getActionType(resource)
+const fetchData =
+  (resource, id, cacheResults = true) =>
+  async dispatch => {
+    // Get action types
+    const { LOADING_TYPE, SUCCESS_TYPE, ERROR_TYPE } = getActionType(resource)
 
-  try {
-    // Loading
-    dispatch({ type: LOADING_TYPE })
+    try {
+      // Get url
+      const url = getResourceEndpoints(resource, id)
 
-    // Get data from API
-    const data = await fetchFromUrl(getResourceEndpoints(resource, id))
+      // Loading
+      dispatch({ type: LOADING_TYPE })
 
-    // Success
-    dispatch({ type: SUCCESS_TYPE, payload: data })
-  } catch (error) {
-    //Error
-    dispatch({ type: ERROR_TYPE, payload: error })
+      // Get data from localStorage
+      let data = localStorage.getItem(url)
+
+      if (data) {
+        // Parse data from localStorage to JS object
+        data = JSON.parse(data)
+      } else {
+        // Get data from API
+        data = await fetchFromUrl(url)
+
+        // Store data in localStorage
+        cacheResults && localStorage.setItem(url, JSON.stringify(data))
+      }
+
+      // Success
+      dispatch({ type: SUCCESS_TYPE, payload: data })
+    } catch (error) {
+      //Error
+      dispatch({ type: ERROR_TYPE, payload: error })
+    }
   }
-}
 
 export { fetchData }
