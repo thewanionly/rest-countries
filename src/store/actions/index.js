@@ -1,3 +1,4 @@
+import { RESOURCE_COUNTRIES, RESOURCE_COUNTRY_DETAIL, RESOURCE_REGIONS } from 'utilities/config'
 import { fetchFromUrl } from 'utilities/helpers'
 
 import {
@@ -16,17 +17,17 @@ import {
 // Get action type based on resource
 const getActionType = resource => {
   const ACTION_TYPES = {
-    countries: {
+    [RESOURCE_COUNTRIES]: {
       LOADING_TYPE: FETCH_COUNTRIES_LOADING,
       SUCCESS_TYPE: FETCH_COUNTRIES_SUCCESS,
       ERROR_TYPE: FETCH_COUNTRIES_ERROR
     },
-    countryDetail: {
+    [RESOURCE_COUNTRY_DETAIL]: {
       LOADING_TYPE: FETCH_COUNTRY_DETAIL_LOADING,
       SUCCESS_TYPE: FETCH_COUNTRY_DETAIL_SUCCESS,
       ERROR_TYPE: FETCH_COUNTRY_DETAIL_ERROR
     },
-    regions: {
+    [RESOURCE_REGIONS]: {
       LOADING_TYPE: FETCH_REGIONS_LOADING,
       SUCCESS_TYPE: FETCH_REGIONS_SUCCESS,
       ERROR_TYPE: FETCH_REGIONS_ERROR

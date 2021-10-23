@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 
-import { PAGE_LIMIT } from 'utilities/config'
+import { PAGE_LIMIT, RESOURCE_COUNTRIES, RESOURCE_REGIONS } from 'utilities/config'
 import { useDarkMode, useFetchData, useFilterData } from 'utilities/hooks'
 
 import Button from 'components/Button'
@@ -12,8 +12,8 @@ import DetailPage from 'views/DetailPage.jsx'
 const App = () => {
   const [isDarkMode, toggleDarkMode] = useDarkMode()
   const [limit, setLimit] = useState(PAGE_LIMIT)
-  const [countries, isLoading, error] = useFetchData('countries')
-  const [regions, isLoadingRegions, errorRegions] = useFetchData('regions')
+  const [countries, isLoading, error] = useFetchData(RESOURCE_COUNTRIES)
+  const [regions, isLoadingRegions, errorRegions] = useFetchData(RESOURCE_REGIONS)
 
   const [filteredCountries, filters, setFilters] = useFilterData(countries, {
     searchField: 'name',

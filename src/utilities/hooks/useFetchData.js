@@ -1,14 +1,20 @@
 import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
-import { API_ENDPOINT, FIELDS_STRING } from 'utilities/config'
+import {
+  API_ENDPOINT,
+  FIELDS_STRING,
+  RESOURCE_COUNTRIES,
+  RESOURCE_COUNTRY_DETAIL,
+  RESOURCE_REGIONS
+} from 'utilities/config'
 import { fetchData } from 'store/actions'
 
 // Resource endpoints
 const RESOURCE_ENDPOINTS = {
-  countries: `${API_ENDPOINT}/all?fields=${FIELDS_STRING}`,
-  countryDetail: `${API_ENDPOINT}/alpha/`,
-  regions: `${API_ENDPOINT}/all?fields=region`
+  [RESOURCE_COUNTRIES]: `${API_ENDPOINT}/all?fields=${FIELDS_STRING}`,
+  [RESOURCE_COUNTRY_DETAIL]: `${API_ENDPOINT}/alpha/`,
+  [RESOURCE_REGIONS]: `${API_ENDPOINT}/all?fields=region`
 }
 
 // Gets resource endpoints given the resource and id

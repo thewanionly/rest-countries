@@ -1,5 +1,6 @@
 import { useNavigate, useParams } from 'react-router-dom'
 
+import { RESOURCE_COUNTRIES, RESOURCE_COUNTRY_DETAIL } from 'utilities/config'
 import { useFetchData } from 'utilities/hooks'
 import { camelCaseToStandardFormat, formatNumber } from 'utilities/helpers'
 
@@ -10,8 +11,8 @@ const DUMMY_BUTTONS = [...new Array(3)]
 const DetailPage = () => {
   const navigate = useNavigate()
   const { id } = useParams()
-  const [countries, isLoadingCountries, errorCountries] = useFetchData('countries')
-  const [countryDetail, isLoading, error] = useFetchData('countryDetail', id)
+  const [countries, isLoadingCountries, errorCountries] = useFetchData(RESOURCE_COUNTRIES)
+  const [countryDetail, isLoading, error] = useFetchData(RESOURCE_COUNTRY_DETAIL, id)
 
   const handleBackClick = () => {
     navigate('/')
