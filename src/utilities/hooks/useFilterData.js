@@ -15,7 +15,7 @@ const useFilterData = (data, filterFields) => {
 
   const filteredCountries = data?.filter(
     data =>
-      (!searchTerm || data[searchField].toLowerCase().includes(searchTerm.toLocaleLowerCase())) &&
+      (!searchTerm || data[searchField].toLowerCase().includes(searchTerm.toLowerCase())) &&
       (!filterTerm || data[filterField] === filterTerm)
   )
 
